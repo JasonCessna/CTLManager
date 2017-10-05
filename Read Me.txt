@@ -1,0 +1,26 @@
+All Panel (no google login required):
+See links for CTL and Team Liquid.
+
+
+Player Panel (google login required, but no extra authentication for team-specifics):
+See matchups, map score updated as they come in, and team rosters
+
+Manager Panel (google login + extra auth):
+_______ Weekly
+Can create lineup for only their team
+Can update match scores for only their team
+Can create wiki code generator for new players (what Kam's python script does)
+
+Admin Panel (google login + extra auth):
+_______ Weekly 
+-Can create lineup for any team
+-Can update match scores for any team
+-Can view generated code for lineups (TL and CTL site)
+-Can view generated code for match scores (TL and CTL site)
+-Can view generated code for standings
+-Can "lock" teams once lineups and match scores are finalized so only admins can edit them (captains will get a view-only mode once their team has been "locked")
+_______ Per Season
+Provide link for google sheets:
+-Weekly Matchups (same format as Season 17. Will have to revise code as is if different team #s are a thing for next season, would have to format it for different formats based on # of teams so this can be run without changing code in the future)
+-Team Roster (each team will have a link for the google sheet)
+-Season Standings / History (this is where the generated code for TL and Wiki will be posted, still hammering out the details on how this will work or if it will exist at all)

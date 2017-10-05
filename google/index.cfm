@@ -1,0 +1,2 @@
+<meta name="google-site-verification" content="FBl7sa3wilJzJq-3DiHnHrhMQhsfxvUfaO0EUJmhydo" />
+<cfhttp url="https://www.googleapis.com/calendar/v3/users/me/calendarList"> <cfhttpparam type="header" name="Authorization" value="OAuth #session.token.access_token#" > </cfhttp> 
