@@ -43,10 +43,10 @@
 		<cfdump var="#email#">--->
 			<center>
 			<cfif accessLevel EQ "ADMIN" OR accessLevel EQ "CAPTAIN">
-				<a href="http://ctl.manage.org/captain/?teamAccess=#hash(accessTeam)#">Captains</a>
+				<a href="http://ctl.manage.org/captain/?teamAccess=#hash(accessTeam)#&access=#hash(accessLevel)#">Captains</a>
 			</cfif>
 			<cfif accessLevel EQ "ADMIN">
-				<a href="http://ctl.manage.org/admin/">Admins</a>
+				<a href="http://ctl.manage.org/admin/?access=#hash(accessLevel)#">Admins</a>
 			</cfif>
 			</center>
 			
