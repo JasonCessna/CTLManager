@@ -25,7 +25,6 @@
 				<h1>Error!</h1>
 				#result.message#
 			</cfoutput>
-			<cfabort>
 		</cfif>
 		<cfset session.token = result.token>
 		<cfset profile = getProfile(session.token.access_token)>
@@ -43,10 +42,10 @@
 		<cfdump var="#email#">--->
 			<center>
 			<cfif accessLevel EQ "ADMIN" OR accessLevel EQ "CAPTAIN">
-				<a href="http://duttles.com/captain/?teamAccess=#hash(accessTeam)#&access=#hash(accessLevel)#">Captains</a>
+				<a href="http://duttles.com/ctlmanager/captain/?teamAccess=#hash(accessTeam)#&access=#hash(accessLevel)#">Captains</a>
 			</cfif>
 			<cfif accessLevel EQ "ADMIN">
-				<a href="http://duttles.com/admin/?access=#hash(accessLevel)#">Admins</a>
+				<a href="http://duttles.com/ctlmanager/admin/?access=#hash(accessLevel)#">Admins</a>
 			</cfif>
 			</center>
 			

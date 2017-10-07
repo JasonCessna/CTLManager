@@ -22,7 +22,7 @@ component {
 
 	public function getProfile(accesstoken) {
 
-		var h = new com.adobe.coldfusion.http();
+		var h = new http();
 		h.setURL("https://www.googleapis.com/oauth2/v1/userinfo");
 		h.setMethod("get");
 		h.addParam(type="header",name="Authorization",value="OAuth #accesstoken#");
@@ -35,7 +35,7 @@ component {
 	
 	public function getLineup(accesstoken) {
 	
-		var h = new com.adobe.coldfusion.http();
+		var h = new http();
 		h.setURL("https://sheets.googleapis.com/v4/spreadsheets/1Zl-gEvvjed7N5KLXHixO5HYewms_FhVAZt-LLEzUW4Y");
 		h.setMethod("get");
 		h.addParam(type="header",name="Authorization",value="OAuth #accesstoken#");
@@ -91,7 +91,7 @@ component {
 			 postBody = postBody & "grant_type=authorization_code";
 
 
-			var h = new com.adobe.coldfusion.http();
+			var h = new http();
 			h.setURL("https://accounts.google.com/o/oauth2/token");
 			h.setMethod("post");
 			h.addParam(type="header",name="Content-Type",value="application/x-www-form-urlencoded");
