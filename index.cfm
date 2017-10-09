@@ -38,16 +38,15 @@
 				<cfset accessTeam = authList.values[i][3]>
 			</cfif>
 		</cfloop>
-		<cfdump var="#accessLevel# #hash(accessLevel)# #accessTeam#">
 		<!---
 		<cfset email = getUserEmail(session.token.access_token)>
 		<cfdump var="#email#">--->
 			<center>
 			<cfif accessLevel EQ "ADMIN" OR accessLevel EQ "CAPTAIN">
-				<a href="http://duttles.com/ctlmanager/captain/index.cfm?teamAccess=#hash(trim(accessTeam))#&access=#hash(trim(accessLevel))#">Captains</a>
+				<a href="http://www.duttles.com/captain.cfm?teamAccess=#hash(trim(accessTeam))#&access=#hash(trim(accessLevel))#">Captains</a>
 			</cfif>
 			<cfif accessLevel EQ "ADMIN">
-				<a href="http://duttles.com/ctlmanager/admin/index.cfm?access=#hash(trim(accessLevel))#">Admins</a>
+				<a href="http://www.duttles.com/captain.cfm?access=#hash(trim(accessLevel))#">Admins</a>
 			</cfif>
 			</center>
 			
