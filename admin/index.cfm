@@ -14,7 +14,7 @@ BEGIN HEADER
  
  <!--- include functions --->
 <cfinclude template="../fn_master.cfm">
-<cfif url.access NEQ hash("ADMIN")>
+<cfif url.access NEQ hash("ADMIN") >
 
 You do not have the proper permissions to view this site. Please contact a CTL admin for assistance
 
@@ -277,7 +277,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 					<cfset structPlayer["race#i#"] 	= ListGetAt(weekLineup.values[i][1], 5, '|')>
 				</cfloop>
 			</cfif>
-			<cfform name="frmTemplate" method="POST" action="http://duttles.com/ctlmanager/admin/index.cfm?section=display&access=#hash(accessLevel)#">
+			<cfform name="frmTemplate" method="POST" action="http://duttles.com/ctlmanager/admin/index.cfm?section=display&access=#accessLevel#">
 				<div align="center">
 					<h1>Create Template For #form.team#'s Week #form.week# Lineup</h1>
 					<table width="60%" cellpadding="5">
@@ -347,7 +347,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 						<cfset structPlayer["score#ListGetAt(weekLineup.values[i][1], 2, '|')#"] = 0>
 					</cfif>
 				</cfloop>
-				<cfform name="frmTemplate" method="POST" action="http://duttles.com/ctlmanager/admin/index.cfm?section=display&access=#hash(accessLevel)#">
+				<cfform name="frmTemplate" method="POST" action="http://duttles.com/ctlmanager/admin/index.cfm?section=display&access=#accessLevel#">
 					<div align="center">
 						<h1>Create Template For #form.team#'s Week #form.week# Lineup</h1><br />
 						<h3><i>Scores are for total map score. Select 1 for a win and 0 for a loss.</i></h3>
@@ -528,7 +528,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 		--------------------------
 		------------------------->
 		<cfdefaultcase>
-			<cfform name="frmTemplate" method="POST" action="http://duttles.com/ctlmanager/admin/index.cfm&access=#hash(accessLevel)#">
+			<cfform name="frmTemplate" method="POST" action="http://duttles.com/ctlmanager/admin/index.cfm&access=#accessLevel#">
 			<div align="center">
 				<h1>Create Template For Lineup Submission</h1>
 				<div id="weekSelectDiv" align="center">

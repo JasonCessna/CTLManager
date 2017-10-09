@@ -17,8 +17,10 @@
 		<cfparam name="url.code" default="">
 		<cfparam name="url.state" default="">
 		<cfparam name="url.error" default="">
+		<!---
 		<cfset result = application.google.validateResult(url.code, url.error, url.state, session.urltoken)>
-
+--->
+		
 		<cfif not result.status>
 		  <!--- Imagine a nicer error here. --->
 			<cfoutput>
@@ -42,10 +44,10 @@
 		<cfdump var="#email#">--->
 			<center>
 			<cfif accessLevel EQ "ADMIN" OR accessLevel EQ "CAPTAIN">
-				<a href="http://duttles.com/ctlmanager/captain/?teamAccess=#hash(accessTeam)#&access=#hash(accessLevel)#">Captains</a>
+				<a href="http://duttles.com/ctlmanager/captain/index.cfm?teamAccess=#hash(accessTeam)#&access=#hash(accessLevel)#">Captains</a>
 			</cfif>
 			<cfif accessLevel EQ "ADMIN">
-				<a href="http://duttles.com/ctlmanager/admin/?access=#hash(accessLevel)#">Admins</a>
+				<a href="http://duttles.com/ctlmanager/admin/index.cfm?access=#hash(accessLevel)#">Admins</a>
 			</cfif>
 			</center>
 			

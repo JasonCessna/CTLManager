@@ -58,7 +58,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
  
 	public function getUserAccess(accesstoken) {
 	
-		var h = new com.adobe.coldfusion.http();
+		var h = new http();
 		h.setURL("https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values/Users");
 		h.setMethod("get");
 		h.addParam(type="header",name="Authorization",value="OAuth #accesstoken#");
@@ -70,7 +70,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 //this doesn't work.
 	 public function getUserEmail(accesstoken,id) {
 	
-		var h = new com.adobe.coldfusion.http();
+		var h = new http();
 		h.setURL("https://people.googleapis.com/v1/people/me");
 		h.setMethod("get");
 		h.addParam(type="header",name="Authorization",value="OAuth #accesstoken#");
@@ -85,7 +85,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	}
 	public function getTeamID(accesstoken) {
 	
-		var h = new com.adobe.coldfusion.http();
+		var h = new http();
 		h.setURL("https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values/MASTER!A:B");
 		h.setMethod("get");
 		h.addParam(type="header",name="Authorization",value="OAuth #accesstoken#");
@@ -96,7 +96,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	}
  public function getMasterList(accesstoken) {
 	
-		var h = new com.adobe.coldfusion.http();
+		var h = new http();
 		h.setURL("https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values/MASTER");
 		h.setMethod("get");
 		h.addParam(type="header",name="Authorization",value="OAuth #accesstoken#");
@@ -107,7 +107,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	}
  public function getLineup1(accesstoken) {
 	
-		var h = new com.adobe.coldfusion.http();
+		var h = new http();
 		h.setURL("https://sheets.googleapis.com/v4/spreadsheets/1Zl-gEvvjed7N5KLXHixO5HYewms_FhVAZt-LLEzUW4Y/values/roster");
 		h.setMethod("get");
 		h.addParam(type="header",name="Authorization",value="OAuth #accesstoken#");
@@ -118,7 +118,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	}
 	public function getWeekMatchup(accesstoken,range) {
 	
-		var h = new com.adobe.coldfusion.http();
+		var h = new http();
 		h.setURL("https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values/WeeklyMatchups!#range#");
 		h.setMethod("get");
 		h.addParam(type="header",name="Authorization",value="OAuth #accesstoken#");
@@ -129,7 +129,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	}
 	public function getWeekMaps(accesstoken,range) {
 	
-		var h = new com.adobe.coldfusion.http();
+		var h = new http();
 		h.setURL("https://sheets.googleapis.com/v4/spreadsheets/1CkaYbVHdbUKP2_yNpd-xKkhctgdajwhOyccCaBVCgpw/values/#range#");
 		h.setMethod("get");
 		h.addParam(type="header",name="Authorization",value="OAuth #accesstoken#");
@@ -141,7 +141,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	
 	public function getTeamRoster(accesstoken,team) {
 	
-		var h = new com.adobe.coldfusion.http();
+		var h = new http();
 		h.setURL("https://sheets.googleapis.com/v4/spreadsheets/#team#/values/A:E");
 		h.setMethod("get");
 		h.addParam(type="header",name="Authorization",value="OAuth #accesstoken#");
@@ -152,7 +152,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	}
 	public function getWeeklyLineup(accesstoken,range) {
 	
-		var h = new com.adobe.coldfusion.http();
+		var h = new http();
 		h.setURL("https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values/WeeklyLineups!#range#");
 		h.setMethod("get");
 		h.addParam(type="header",name="Authorization",value="OAuth #accesstoken#");
@@ -163,7 +163,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	}
 	public function getWeeklyMatchup(accesstoken,range) {
 	
-		var h = new com.adobe.coldfusion.http();
+		var h = new http();
 		h.setURL("https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values/WeeklyLineups!#range#");
 		h.setMethod("get");
 		h.addParam(type="header",name="Authorization",value="OAuth #accesstoken#");
@@ -174,7 +174,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	}
 	public function pushTeamRoster(accesstoken,range,player1,player2,player3,player4,player5,player6,player7) {
 	
-		var h = new com.adobe.coldfusion.http();
+		var h = new http();
 		h.setURL("https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values:batchUpdate");
 		h.setMethod("POST");
 		h.addParam(type="header",name="Authorization",value="OAuth #accesstoken#");
