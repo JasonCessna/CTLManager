@@ -14,7 +14,7 @@ component {
 		return "https://accounts.google.com/o/oauth2/auth?" & 
 				 "client_id=#urlEncodedFormat(variables.clientid)#" & 
      			 "&redirect_uri=#urlEncodedFormat(arguments.redirecturl)#" & 
-				 "&scope=https://www.googleapis.com/auth/userinfo.profile email https://www.googleapis.com/auth/user.emails.read https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive" & 
+				 "&scope=https://www.googleapis.com/auth/userinfo.profile email https://www.googleapis.com/auth/user.emails.read https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive" & 
 				 "&state=#urlEncodedFormat(arguments.state)#
 				 &response_type=code";
 

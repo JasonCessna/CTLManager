@@ -29,7 +29,7 @@
 			</cfoutput>
 		</cfif>
 		<cfset session.token = result.token>
-		<cfset profile = getProfile(session.token.access_token)>
+		<cfset profile = application.google.getProfile(session.token.access_token)>
 		<cfset email = profile.email>
 		<cfset authList = getUserAccess(session.token.access_token)>
 		<cfloop from="2" to="#ArrayLen(authList.values)#" index="i">
@@ -43,7 +43,7 @@
 		<cfdump var="#email#">--->
 			<center>
 			<cfif accessLevel EQ "ADMIN" OR accessLevel EQ "CAPTAIN">
-				<a href="http://www.duttles.com/captain.cfm?teamAccess=#hash(trim(accessTeam))#&access=#hash(trim(accessLevel))#">Captains</a>
+				<a href="http://www.duttles.com/captain.cfm?teamAccess=#accessTeam#&access=#hash(trim(accessLevel))#">Captains</a>
 			</cfif>
 			<cfif accessLevel EQ "ADMIN">
 				<a href="http://www.duttles.com/captain.cfm?access=#hash(trim(accessLevel))#">Admins</a>

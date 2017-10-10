@@ -172,10 +172,11 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 		var result = h.send().getPrefix();
 		return deserializeJSON(result.filecontent.toString());
 	}
+	/*
 	public function pushTeamRoster(accesstoken,range,player1,player2,player3,player4,player5,player6,player7) {
 	
 		var h = new http();
-		h.setURL("https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values:batchUpdate");
+		h.setURL("https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values/batchUpdate");
 		h.setMethod("POST");
 		h.addParam(type="header",name="Authorization",value="OAuth #accesstoken#");
 		h.addParam(type="header",name="GData-Version",value="3");
@@ -194,7 +195,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 		h.setResolveURL(true);
 		var result = h.send().getPrefix();
 		return deserializeJSON(result.filecontent.toString());
-	}
+	} */
 
  /*
 	* arrayToQuery
@@ -215,6 +216,36 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
  
  </cfscript>
  
+ <cffunction name="pushTeamroster">
+	<cfargument name="accesstoken">
+	<cfargument name="range">
+	<cfargument name="player1">
+	<cfargument name="player2">
+	<cfargument name="player3">
+	<cfargument name="player4">
+	<cfargument name="player5">
+	<cfargument name="player6">
+	<cfargument name="player7">
+	<cfset postBody = '{
+		  "valueInputOption": "USER_ENTERED",
+		  "data": [
+			{
+			  "range": "WeeklyLineups!#range#",
+			  "majorDimension": "COLUMNS",
+			  "values": [
+				["#player1#","#player2#","#player3#","#player4#","#player5#","#player6#","#player7#"]
+			  ]
+			},
+		  ]
+		}'>
+	<cfhttp method="post" url="https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values:batchUpdate">
+		<cfhttpparam type="header" name="Authorization" value="OAuth #accesstoken#">
+		<cfhttpparam type="header" name="GData-Version" value="3">
+		
+		<cfhttpparam type="body" value="#postBody#">
+	</cfhttp>
+	<cfreturn deserializeJSON(cfhttp.filecontent.toString()>
+ </cffunction>
  
  <cffunction name="getRefreshToken"> 
 	<cfargument name="refresh" required="false" default="" type="string"> 

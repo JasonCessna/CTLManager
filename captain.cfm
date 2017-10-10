@@ -182,13 +182,13 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 		<cfset diaList = listAppend(diaList,"Diamond1", ",")>
 
 		<!--- set map for map location --->
-		<cfset aryMapSlot[1][2] = weekMaps.values[1][1]>
-		<cfset aryMapSlot[2][2] = weekMaps.values[2][1]>
-		<cfset aryMapSlot[3][2] = weekMaps.values[3][1]>
-		<cfset aryMapSlot[4][2] = weekMaps.values[4][1]>
-		<cfset aryMapSlot[5][2] = weekMaps.values[5][1]>
-		<cfset aryMapSlot[6][2] = weekMaps.values[6][1]>
-		<cfset aryMapSlot[7][2] = weekMaps.values[7][1]>
+		<cfset aryMapSlot[1][2] = weekMaps.values[2][1]>
+		<cfset aryMapSlot[2][2] = weekMaps.values[1][1]>
+		<cfset aryMapSlot[3][2] = weekMaps.values[4][1]>
+		<cfset aryMapSlot[4][2] = weekMaps.values[7][1]>
+		<cfset aryMapSlot[5][2] = weekMaps.values[3][1]>
+		<cfset aryMapSlot[6][2] = weekMaps.values[5][1]>
+		<cfset aryMapSlot[7][2] = weekMaps.values[6][1]>
 		
 		<!--- get total team list --->
 		<cfset teamList = getTeamID(session.token.access_token)>
@@ -277,7 +277,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 					<cfset structPlayer["race#i#"] 	= ListGetAt(weekLineup.values[i][1], 5, '|')>
 				</cfloop>
 			</cfif>
-			<cfform name="frmTemplate" method="POST" action="http://duttles.com/captain.cfm?section=display&access=#accessLevel#">
+			<cfform name="frmTemplate" method="POST" action="http://www.duttles.com/captain.cfm?section=display&access=#accessLevel#">
 				<div align="center">
 					<h1>Create Template For #form.team#'s Week #form.week# Lineup</h1>
 					<table width="60%" cellpadding="5">
@@ -347,7 +347,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 						<cfset structPlayer["score#ListGetAt(weekLineup.values[i][1], 2, '|')#"] = 0>
 					</cfif>
 				</cfloop>
-				<cfform name="frmTemplate" method="POST" action="http://duttles.com/captain.cfm?section=display&access=#accessLevel#">
+				<cfform name="frmTemplate" method="POST" action="http://www.duttles.com/captain.cfm?section=display&access=#accessLevel#">
 					<div align="center">
 						<h1>Create Template For #form.team#'s Week #form.week# Lineup</h1><br />
 						<h3><i>Scores are for total map score. Select 1 for a win and 0 for a loss.</i></h3>
@@ -530,7 +530,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 		--------------------------
 		------------------------->
 		<cfdefaultcase>
-			<cfform name="frmTemplate" method="POST" action="http://duttles.com/captain.cfm&access=#accessLevel#">
+			<cfform name="frmTemplate" method="POST" action="http://www.duttles.com/captain.cfm&access=#accessLevel#">
 			<div align="center">
 				<h1>Create Template For Lineup Submission</h1>
 				<div id="weekSelectDiv" align="center">
