@@ -227,24 +227,17 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	<cfargument name="player6">
 	<cfargument name="player7">
 	<cfset postBody = '{
-		  "valueInputOption": "USER_ENTERED",
-		  "data": [
-			{
-			  "range": "WeeklyLineups!#range#",
-			  "majorDimension": "COLUMNS",
-			  "values": [
-				["#player1#","#player2#","#player3#","#player4#","#player5#","#player6#","#player7#"]
-			  ]
-			},
-		  ]
-		}'>
-	<cfhttp method="post" url="https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values:batchUpdate">
-		<cfhttpparam type="header" name="Authorization" value="OAuth #accesstoken#">
+                  "range": "WeeklyLineups!#arguments.range#",
+		  "majorDimension": "COLUMNS",
+                  "values": [	["#arguments.player1#","#arguments.player2#","#arguments.player3#","#arguments.player4#","#arguments.player5#","#arguments.player6#","#arguments.player7#"]]}'>
+	<cfhttp method="put" url="https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values/WeeklyLineups!#arguments.range#">
+		<cfhttpparam type="header" name="Authorization" value="OAuth #arguments.accesstoken#"><cfhttpparam name="Content-Type" type="header" value="application/json"> 
 		<cfhttpparam type="header" name="GData-Version" value="3">
-		
+		<cfhttpparam type="URL" name="valueInputOption" value="USER_ENTERED">
 		<cfhttpparam type="body" value="#postBody#">
 	</cfhttp>
-	<cfreturn deserializeJSON(cfhttp.filecontent.toString()>
+<cfset response = cfhttp>
+	<cfreturn cfhttp.filecontent>
  </cffunction>
  
  <cffunction name="getRefreshToken"> 
