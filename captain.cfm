@@ -706,7 +706,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 								<cfset "teamName#i#" = teamList.values[i][1]>
 								<cfset name = teamList.values[i][1]>
 								<cfset tempMatchupRange = alpha["matchup#form.week#"] & toString("#i#")>
-								<cfset "oppTeam" = getWeekMatchup(session.token.access_token,tempMatchupRange)>
+								<cfset oppTeam = getWeekMatchup(session.token.access_token,tempMatchupRange)>
 								<cfset listTeams = listAppend(listTeams, "#oppTeam.[1][1]#", ",")>
 								<cfset listTeams = listAppend(listTeams, "#name#", ",")>
 							</cfif>
