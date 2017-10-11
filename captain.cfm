@@ -732,9 +732,9 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 										</cfif>
 									</td>
 									<td>#aryTeam[i]#</td>
-									<td>#structLocked["teamName"&i].[1][1]#</td>
+									<td>#structLocked["teamName"&i].values[1][1]#</td>
 									<td>#aryTeam[i+1]#</td>
-									<td>#structLocked["teamName"&(i+1)].[1][1]#</td>
+									<td>#structLocked["teamName"&(i+1)].values[1][1]#</td>
 								</tr>
 							</cfloop>
 						</table>
