@@ -698,7 +698,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 				
 				<cfcase value="status">
 					<cfif url.accessLevel EQ trim(hash('ADMIN'))>
-						<cfset listTeams = "">
+						<cfset listTeams = "0">
 						<cfset structLocked = StructNew()>
 						<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
 							<cfset structLocked["#teamList.values[i][1]#"] = i>
@@ -711,6 +711,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 								<cfset listTeams = listAppend(listTeams, "#name#", ",")>
 							</cfif>
 						</cfloop>
+						<cfset listdeleteat(listTeams, 1, ",")>
 						<cfset aryTeam = ListToArray(listTeams, ",")>
 						<cfform method="POST" action="http://www.duttles.com/captain.cfm?section=display&access=#accessLevel#&displayType=lineup">
 						<table width="60%" cellpadding="5">
