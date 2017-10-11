@@ -700,7 +700,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 					<cfif url.access EQ trim(hash('ADMIN'))>
 						<cfset listTeams = "0">
 						<cfset structLocked = StructNew()>
-						<cfloop from="2" to="#ArrayLen(teamList.values) + 1#" index="i">
+						<cfloop from="2" to="#ArrayLen(teamList.values)#" index="i">
 							<cfset structLocked["#teamList.values[i][1]#"] = i>
 							<cfif listContains(listTeams,teamList.values[i][1], ",") EQ 0>
 								<cfset "teamName#i#" = teamList.values[i][1]>
@@ -714,35 +714,37 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 						<cfset listdeleteat(listTeams, 1, ",")>
 						<cfset aryTeam = ListToArray(listTeams, ",")>
 						<cfform method="POST" action="http://www.duttles.com/captain.cfm?section=display&access=#accessLevel#&displayType=lineup">
-						<table width="60%" cellpadding="5">
-							<tr>
-								<th>Select Matchup</th>
-								<th>Team 1</th>
-								<th>Lineups Submitted</th>
-								<th>Team 2</th>
-								<th>Lineups Submitted</th>
-							</tr>
-							<cfloop from="4" to="#ArrayLen(aryTeam)#" index="i" step="2">
-								<cfparam name="structLocked['teamName#i#']" default="">
-								<cfparam name="structLocked['teamName#i+1#']" default="">
-								<cfset structLocked["teamName#i#"] = getIsLocked(session.token.access_token,"C#structLocked[aryTeam[i]]#")>
-								<cfset structLocked["teamName#i+1#"] = getIsLocked(session.token.access_token,"C#structLocked[aryTeam[i + 1]]#")>
+						<div align="center">
+							<table width="60%" cellpadding="5">
 								<tr>
-									<td>
-										<cfif structLocked["teamName#i#"].values[1][1] EQ "yes" AND structLocked["teamName#i+1#"].values[1][1] EQ "yes">
-											<input type="radio" id="team" value="#aryTeam[i]#">
-										</cfif>
-									</td>
-									<td>#aryTeam[i]#</td>
-									<td>#structLocked["teamName"&i].values[1][1]#</td>
-									<td>#aryTeam[i+1]#</td>
-									<td>#structLocked["teamName"&(i+1)].values[1][1]#</td>
+									<th>Select Matchup</th>
+									<th>Team 1</th>
+									<th>Lineups Submitted</th>
+									<th>Team 2</th>
+									<th>Lineups Submitted</th>
 								</tr>
-							</cfloop>
-						</table>
-						<input type="hidden" name="week" value="#form.week#">
-						<input type="hidden" name="type" value="display,lineup">
-						<div align="center"><input type="submit" name="submit" id="submit" value="Vew Matchup Code"></div>
+								<cfloop from="4" to="#ArrayLen(aryTeam)#" index="i" step="2">
+									<cfparam name="structLocked['teamName#i#']" default="">
+									<cfparam name="structLocked['teamName#i+1#']" default="">
+									<cfset structLocked["teamName#i#"] = getIsLocked(session.token.access_token,"C#structLocked[aryTeam[i]]#")>
+									<cfset structLocked["teamName#i+1#"] = getIsLocked(session.token.access_token,"C#structLocked[aryTeam[i + 1]]#")>
+									<tr>
+										<td>
+											<cfif structLocked["teamName#i#"].values[1][1] EQ "yes" AND structLocked["teamName#i+1#"].values[1][1] EQ "yes">
+												<input type="radio" id="team" name="team" value="#aryTeam[i]#">
+											</cfif>
+										</td>
+										<td>#aryTeam[i]#</td>
+										<td>#structLocked["teamName"&i].values[1][1]#</td>
+										<td>#aryTeam[i+1]#</td>
+										<td>#structLocked["teamName"&(i+1)].values[1][1]#</td>
+									</tr>
+								</cfloop>
+							</table>
+							<input type="hidden" name="week" value="#form.week#">
+							<input type="hidden" name="type" value="display,lineup">
+							<div align="center"><input type="submit" name="submit" id="submit" value="Vew Matchup Code"></div>
+						</div>
 						</cfform>
 					</cfif>
 				
