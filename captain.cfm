@@ -704,10 +704,11 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 							<cfset structLocked["#teamList.values[i][1]#"] = i>
 							<cfif listContains(listTeams,teamList.values[i][1], ",") EQ 0>
 								<cfset "teamName#i#" = teamList.values[i][1]>
+								<cfset name = teamList.values[i][1]>
 								<cfset tempMatchupRange = alpha["matchup#form.week#"] & toString("#i#")>
-								<cfset "oppTeam#i#" = getWeekMatchup(session.token.access_token,tempMatchupRange)>
-								<cfset listAppend(listTeams, oppTeam#i#.[i][1], ",")>
-								<cfset listAppend(listTeams, teamName#i#, ",")>
+								<cfset "oppTeam" = getWeekMatchup(session.token.access_token,tempMatchupRange)>
+								<cfset listAppend(listTeams, oppTeam.[1][1], ",")>
+								<cfset listAppend(listTeams, name, ",")>
 							</cfif>
 						</cfloop>
 						<cfset aryTeam = ListToArray(listTeams, ",")>
