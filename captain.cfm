@@ -266,7 +266,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 	BEGIN MAIN
 	-------
 	 ----->
-	<cfswitch expression="#url.section#">
+	<cfswitch expression="#left(url.section,7)#">
 	 <!------------------------
 		--------------------------
 				LINEUPS
@@ -625,7 +625,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 							</cfif>
 						</cfloop>
 						
-						<div align="center>
+						<div align="center">
 							<table width="60%" cellpadding="5">
 								<tr>
 									<td colspan="5">
@@ -743,6 +743,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 						<div align="center"><input type="submit" name="submit" id="submit" value="Vew Matchup Code"></div>
 						</cfform>
 					</cfif>
+					I am here.
 				</cfcase>
 				<cfdefaultcase>
 				</cfdefaultcase>
