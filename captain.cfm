@@ -11,7 +11,7 @@ BEGIN HEADER
  ----->
 <cfparam name="url.displayType" default="">
 <cfif isDefined('form.type')>
-	<cfif left(form.type,6) EQ "display">
+	<cfif left(form.type,7) EQ "display">
 		<cfset url.displayType = listgetat(form.type, 2, ",")>
 	</cfif>
 </cfif>
@@ -700,7 +700,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 					<cfif url.access EQ trim(hash('ADMIN'))>
 						<cfset listTeams = "0">
 						<cfset structLocked = StructNew()>
-						<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
+						<cfloop from="2" to="#ArrayLen(teamList.values) + 1#" index="i">
 							<cfset structLocked["#teamList.values[i][1]#"] = i>
 							<cfif listContains(listTeams,teamList.values[i][1], ",") EQ 0>
 								<cfset "teamName#i#" = teamList.values[i][1]>
@@ -722,9 +722,11 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 								<th>Team 2</th>
 								<th>Lineups Submitted</th>
 							</tr>
-							<cfloop from="1" to="#ArrayLen(aryTeam)#" index="i" step="2">
-								<cfset structLocked["teamName#i#"] = getIsLocked(session.token.access_token,"C#structLocked['teamName' & i]#")>
-								<cfset structLocked["teamName#i+1#"] = getIsLocked(session.token.access_token,"C#structLocked['teamName' & (i + 1)]#")>
+							<cfloop from="4" to="#ArrayLen(aryTeam)#" index="i" step="2">
+								<cfparam name="structLocked['teamName#i#']" default="">
+								<cfparam name="structLocked['teamName#i+1#']" default="">
+								<cfset structLocked["teamName#i#"] = getIsLocked(session.token.access_token,"C#structLocked[aryTeam[i]]#")>
+								<cfset structLocked["teamName#i+1#"] = getIsLocked(session.token.access_token,"C#structLocked[aryTeam[i + 1]]#")>
 								<tr>
 									<td>
 										<cfif structLocked["teamName#i#"].values[1][1] EQ "yes" AND structLocked["teamName#i+1#"].values[1][1] EQ "yes">
