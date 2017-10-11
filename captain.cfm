@@ -10,7 +10,7 @@ BEGIN HEADER
 -------
  ----->
 <cfparam name="url.displayType" default="">
-<cfif isDefined(form.type)>
+<cfif isDefined('form.type')>
 	<cfif left(form.type,6) EQ "display">
 		<cfset url.displayType = listgetat(form.type, 2, ",")>
 	</cfif>
@@ -531,7 +531,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 								</cfloop>
 							</table>
 						</div>
-						<cfif url.accessLevel EQ trim(hash('ADMIN'))>
+						<cfif url.access EQ trim(hash('ADMIN'))>
 							<table width="100%">
 								<tr>
 									<th><h1>Team Liquid Code For Lineups</h1></h1>
@@ -685,7 +685,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 								</cfloop>
 							</table>
 						</div>
-						<cfif url.accessLevel EQ trim(hash('ADMIN'))>
+						<cfif url.access EQ trim(hash('ADMIN'))>
 						</cfif>
 					<cfelse>
 						<div align="center">
@@ -697,7 +697,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 				</cfcase>
 				
 				<cfcase value="status">
-					<cfif url.accessLevel EQ trim(hash('ADMIN'))>
+					<cfif url.access EQ trim(hash('ADMIN'))>
 						<cfset listTeams = "0">
 						<cfset structLocked = StructNew()>
 						<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
@@ -707,7 +707,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 								<cfset name = teamList.values[i][1]>
 								<cfset tempMatchupRange = alpha["matchup#form.week#"] & toString("#i#")>
 								<cfset oppTeam = getWeekMatchup(session.token.access_token,tempMatchupRange)>
-								<cfset listTeams = listAppend(listTeams, "#oppTeam.values.[1][1]#", ",")>
+								<cfset listTeams = listAppend(listTeams, "#oppTeam.values[1][1]#", ",")>
 								<cfset listTeams = listAppend(listTeams, "#name#", ",")>
 							</cfif>
 						</cfloop>
@@ -727,7 +727,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 								<cfset structLocked["teamName#i+1#"] = getIsLocked(session.token.access_token,"C#structLocked['teamName' & (i + 1)]#")>
 								<tr>
 									<td>
-										<cfif structLocked["teamName#i#"].values.[1][1] EQ "yes" AND structLocked["teamName#i+1#"].values.[1][1] EQ "yes">
+										<cfif structLocked["teamName#i#"].values[1][1] EQ "yes" AND structLocked["teamName#i+1#"].values[1][1] EQ "yes">
 											<input type="radio" id="team" value="#aryTeam[i]#">
 										</cfif>
 									</td>
@@ -755,7 +755,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 		--------------------------
 		------------------------->
 		<cfdefaultcase>
-			<cfform name="frmTemplate" method="POST" action="http://www.duttles.com/captain.cfm&access=#accessLevel#">
+			<cfform name="frmTemplate" method="POST" action="http://www.duttles.com/captain.cfm?access=#accessLevel#">
 			<div align="center">
 				<h1>Create Template For Lineup Submission</h1>
 				<div id="weekSelectDiv" align="center">
@@ -779,7 +779,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 						</select>
 					</div>
 				</div>
-				<cfif url.accessLevel EQ trim(hash('ADMIN'))>
+				<cfif url.access EQ trim(hash('ADMIN'))>
 					<div id="teamSelectDiv" align="center">
 						<div>Select Team</div>
 						<div>
@@ -804,7 +804,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 					<div>
 						<input type="radio" id="lineup" name="type" value="lineup" required="true">Submit / Edit Weekly Lineup - BETA<br/>
 						<input type="radio" id="scores" name="type" value="scores">Submit / Edit Weekly Match Scores - ALPHA<br/>
-						<cfif url.accessLevel EQ trim(hash('ADMIN'))>
+						<cfif url.access EQ trim(hash('ADMIN'))>
 							<input type="radio" id="display,lineup" name="type" value="display">View Lineup Code for Matchup - BETA<br/>
 							<input type="radio" id="display,scores" name="type" value="display">View Score Code for Matchup - IN DEV<br/>
 							<input type="radio" id="display,status" name="type" value="display">View Team Submission Status (team selection ignored) - IN DEV
