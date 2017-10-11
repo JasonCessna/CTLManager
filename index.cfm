@@ -28,6 +28,7 @@
 				#result.message#
 			</cfoutput>
 		</cfif>
+		<cfset accessLevel = "">
 		<cfset session.token = result.token>
 		<cfset profile = application.google.getProfile(session.token.access_token)>
 		<cfset email = profile.email>
@@ -36,20 +37,25 @@
 			<cfif authList.values[i][2] EQ email>
 				<cfset accessLevel = authList.values[i][4]>
 				<cfset accessTeam = authList.values[i][3]>
+				<cfset userName = authList.values[i][1]>
 			</cfif>
 		</cfloop>
 		<!---
 		<cfset email = getUserEmail(session.token.access_token)>
 		<cfdump var="#email#">--->
-			<center>
+		<center>
+		<cfif accessLevel NEQ "">
+			Welcome #userName# (#email#). You are currently logged in as a #accessLevel# <cfif accessLevel NEQ "ADMIN">for team #accessTeam#</cfif>.<br/>
 			<cfif accessLevel EQ "ADMIN" OR accessLevel EQ "CAPTAIN">
-				<a href="http://www.duttles.com/captain.cfm?teamAccess=#accessTeam#&access=#hash(trim(accessLevel))#">Captains</a>
+				<a href="http://www.duttles.com/captain.cfm?teamAccess=#accessTeam#&access=#hash(trim(accessLevel))#">Captains</a><cfif accessLevel EQ "ADMIN"> - for lineups and score submissions</cfif><br/>
 			</cfif>
 			<cfif accessLevel EQ "ADMIN">
-				<a href="http://www.duttles.com/captain.cfm?access=#hash(trim(accessLevel))#">Admins</a>
+				<a href="http://www.duttles.com/captain.cfm?access=#hash(trim(accessLevel))#">Admins</a> - for getting auto-generated code and changing season settings.
 			</cfif>
-			</center>
-			
+		<cfelse>
+		
+		</cfif>
+		</center>
 
  </cfcase>
  <cfdefaultcase>
@@ -60,8 +66,11 @@
 	
 	<cfoutput>
 		<p><div align="center"><h1>
-		<a href="#authurl#">LOGIN TO CONTINUE</a></h1></div>
+		<a href="#authurl#">LOGIN WITH GOOGLE TO CONTINUE</a></h1></div>
 		</p>
+		<div align="center">Note: your first time to log-in will prompt you to give this app access to drive, sheets, and your email.<br/>
+							This asking so you are allowing google to use your credentials to update forms on MY end, not so we can access yours.<br/>
+							To access your information (besides your email address) I would need the unique ID's for each document, which I don't have. Cheers! - Duttles</div>
 	</cfoutput>
 </cfdefaultcase>
 
