@@ -707,7 +707,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 								<cfset name = teamList.values[i][1]>
 								<cfset tempMatchupRange = alpha["matchup#form.week#"] & toString("#i#")>
 								<cfset oppTeam = getWeekMatchup(session.token.access_token,tempMatchupRange)>
-								<cfset listTeams = listAppend(listTeams, "#oppTeam.[1][1]#", ",")>
+								<cfset listTeams = listAppend(listTeams, "#oppTeam.values.[1][1]#", ",")>
 								<cfset listTeams = listAppend(listTeams, "#name#", ",")>
 							</cfif>
 						</cfloop>
@@ -727,7 +727,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 								<cfset structLocked["teamName#i+1#"] = getIsLocked(session.token.access_token,"C#structLocked['teamName' & (i + 1)]#")>
 								<tr>
 									<td>
-										<cfif structLocked["teamName#i#"].[1][1] EQ "yes" AND structLocked["teamName#i+1#"].[1][1] EQ "yes">
+										<cfif structLocked["teamName#i#"].values.[1][1] EQ "yes" AND structLocked["teamName#i+1#"].values.[1][1] EQ "yes">
 											<input type="radio" id="team" value="#aryTeam[i]#">
 										</cfif>
 									</td>
