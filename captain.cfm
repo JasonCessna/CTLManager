@@ -631,10 +631,10 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 									<td colspan="5">
 										<table width="100%">
 											<tr>
-												<td align="right">#form.team# <img src="structIMG['#form.team#']></td>
+												<td align="right">#form.team# <img src="#structIMG[form.team]#"></td>
 												<td align="center" width="25%">#team1Score#</td>
 												<td align="center" width="25%">#team2Score#</td>
-												<td align="left"><img src="structIMG['#oppTeam.values[1][1]#']> #oppTeam.values[1][1]#</td>
+												<td align="left"><img src="#structIMG[oppTeam.values[1][1]]#"> #oppTeam.values[1][1]#</td>
 											</tr>
 										</table>
 									</td>
@@ -743,7 +743,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 						<div align="center"><input type="submit" name="submit" id="submit" value="Vew Matchup Code"></div>
 						</cfform>
 					</cfif>
-					I am here.
+				
 				</cfcase>
 				<cfdefaultcase>
 				</cfdefaultcase>
