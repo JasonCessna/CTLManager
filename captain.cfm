@@ -273,7 +273,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 		--------------------------
 		------------------------->
 		<cfcase value="lineup">
-			<cfset getLocked = getIsLocked(session.token.access_token, "C#teamMatchupLocation#">
+			<cfset getLocked = getIsLocked(session.token.access_token, "C#teamMatchupLocation#)">
 			<cfif getLocked.values[1][1] NEQ "yes">
 				<cfset weekLineup = getWeeklyLineup(session.token.access_token,getLineupRange)>
 				<cfset structPlayer = StructNew()>
@@ -347,7 +347,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 		--------------------------
 		------------------------->
 		<cfcase value="scores">
-			<cfset getLocked = getIsLocked(session.token.access_token, "D#teamMatchupLocation#">
+			<cfset getLocked = getIsLocked(session.token.access_token, "D#teamMatchupLocation#)">
 			<cfif getLocked.values[1][1] NEQ "yes">
 				<cfset weekLineup = getWeeklyLineup(session.token.access_token,getScoreRange)>
 				<cfdump var="#weekLineup#">
@@ -499,7 +499,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 			
 			<cfswitch expression="#url.displayType#">
 				<cfcase value="lineup">
-					<cfset get2Lock = getLocked(session.token.access_token,"C#team2MatchupLocation#")>
+					<cfset get2Lock = getIsLocked(session.token.access_token,"C#team2MatchupLocation#")>
 					<cfif get2Lock[1][1] EQ "yes">
 						<div align="center">
 							<table width="60%" cellpadding="5">
@@ -721,8 +721,8 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 								<th>Lineups Submitted</th>
 							</tr>
 							<cfloop from="1" to="#ArrayLen(aryTeam)#" index="i" step="2">
-								<cfset structLocked["teamName#i#"] = getLocked(session.token.access_token,"C#structLocked['teamName' & i]#">
-								<cfset structLocked["teamName#i+1#"] = getLocked(session.token.access_token,"C#structLocked['teamName' & (i + 1)]#">
+								<cfset structLocked["teamName#i#"] = getIsLocked(session.token.access_token,"C#structLocked['teamName' & i]#)">
+								<cfset structLocked["teamName#i+1#"] = getIsLocked(session.token.access_token,"C#structLocked['teamName' & (i + 1)]#)">
 								<tr>
 									<td>
 										<cfif structLocked["teamName#i#"].[1][1] EQ "yes" AND structLocked["teamName#i+1#"].[1][1] EQ "yes">
