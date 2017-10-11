@@ -805,9 +805,9 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 						<input type="radio" id="lineup" name="type" value="lineup" required="true">Submit / Edit Weekly Lineup - BETA<br/>
 						<input type="radio" id="scores" name="type" value="scores">Submit / Edit Weekly Match Scores - ALPHA<br/>
 						<cfif url.access EQ trim(hash('ADMIN'))>
-							<input type="radio" id="display,lineup" name="type" value="display">View Lineup Code for Matchup - BETA<br/>
-							<input type="radio" id="display,scores" name="type" value="display">View Score Code for Matchup - IN DEV<br/>
-							<input type="radio" id="display,status" name="type" value="display">View Team Submission Status (team selection ignored) - IN DEV
+							<input type="radio" id="display,lineup" name="type" value="display,lineup">View Lineup Code for Matchup - BETA<br/>
+							<input type="radio" id="display,scores" name="type" value="display,scores">View Score Code for Matchup - IN DEV<br/>
+							<input type="radio" id="display,status" name="type" value="display,status">View Team Submission Status (team selection ignored) - IN DEV
 						</cfif>
 					</div>
 				</div>
