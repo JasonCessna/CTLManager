@@ -503,6 +503,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 				<cfcase value="lineup">
 					<cfset get2Lock = getIsLocked(session.token.access_token,"C#team2MatchupLocation#")>
 					<cfif get2Lock.values[1][1] EQ "yes">
+						<cfif url.access EQ trim(hash('ADMIN'))>
 						<div align="center">
 							<table width="60%" cellpadding="5">
 								<tr>
@@ -533,7 +534,6 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 								</cfloop>
 							</table>
 						</div>
-						<cfif url.access EQ trim(hash('ADMIN'))>
 							<table width="100%">
 								<tr>
 									<th><h1>Team Liquid Code For Lineups</h1></h1>
@@ -553,7 +553,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 							
 							<script>
 								var TLpad;
-								TLpad="{Box|break|padding=2em}} <br />";
+								TLpad="{{Box|break|padding=2em}} <br />";
 								TLpad+="{{TeamMatch <br />";
 								TLpad+="|width=300 <br />";
 								TLpad+="|team1=#form.team# <br />";
@@ -565,15 +565,15 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 									TLpad+="&lt;!-- Match #i# \--\> <br />";
 									<cfif i NEQ 7>
 										TLpad+="|m#i#p1=#ListGetAt(weekResults1.values[i][1],1,"|")# [[File:#aryMapSlot[i][1]#-medium.png|17px]] |m#i#p1race=<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults1.values[i][1],5,"|"),1)#</cfif> |m#i#p1flag=ff |m#i#p1link=false <br />";
-										TLpad+="|m#i#p2=[[File:#aryMapSlot[i][2]#-medium.png|17px]] #ListGetAt(weekResults2.values[i][1],1,"|")# |m#i#p2race=<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults2.values[i][1],5,"|"),1)#</cfif> |m#i#p2flag=ff |m#i#p2link=false <br />";
-										TLpad+="|m1map=#aryMapSlot[i][2]#<br />";
+										TLpad+="|m#i#p2=[[File:#aryMapSlot[i][1]#-medium.png|17px]] #ListGetAt(weekResults2.values[i][1],1,"|")# |m#i#p2race=<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults2.values[i][1],5,"|"),1)#</cfif> |m#i#p2flag=ff |m#i#p2link=false <br />";
+										TLpad+="|m#i#map=#aryMapSlot[i][2]#<br />";
 									<cfelse>
-										TLpad+="|ace1p1=#ListGetAt(weekResults1.values[i][1],1,"|")# [[File:MasterMedium.png|17px]] |ace1p1race=<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults1.values[i][1],1,"|"),1)#</cfif> |ace1p1flag=ff |ace1p1link=false <br />";
+										TLpad+="|ace1p1=#ListGetAt(weekResults1.values[i][1],1,"|")# [[File:MasterMedium.png|17px]] |ace1p1race=<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults1.values[i][1],5,"|"),1)#</cfif> |ace1p1flag=ff |ace1p1link=false <br />";
 										TLpad+="|ace1p2=[[File:MasterMedium.png|17px]] #ListGetAt(weekResults2.values[i][1],1,"|")# |ace1p2race=<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults2.values[i][1],5,"|"),1)#</cfif> |ace1p2flag=ff |ace1p2link=false <br />";
 										TLpad+="|ace1map=#aryMapSlot[i][2]# LE <br />";
 										TLpad+="|ace1win= <br />";
 										TLpad+="\&lt;!-- Match 8 --> <br />";
-										TLpad+="|ace2p1=#ListGetAt(weekResults1.values[i][1],1,"|")# [[File:MasterMedium.png|17px]] |ace2p1race=<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults1.values[i][1],1,"|"),1)#</cfif> |ace2p1flag=ff |ace2p1link=false <br />";
+										TLpad+="|ace2p1=#ListGetAt(weekResults1.values[i][1],1,"|")# [[File:MasterMedium.png|17px]] |ace2p1race=<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults1.values[i][1],5,"|"),1)#</cfif> |ace2p1flag=ff |ace2p1link=false <br />";
 										TLpad+="|ace2p2=[[File:MasterMedium.png|17px]] #ListGetAt(weekResults2.values[i][1],1,"|")# |ace2p2race=<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults2.values[i][1],5,"|"),1)#</cfif> |ace2p2flag=ff |ace2p2link=false <br />";
 										TLpad+="|ace2map= <br />";
 										TLpad+="|ace2win= <br />";
