@@ -760,8 +760,9 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 				</cfcase>
 				<cfcase value="fullLineup">
 						<cfset listTeams = "">
-						<cfloop from="1" to="#ArrayLen(teamList.values)#" index="x">
-							<cfif listFind(listTeams,teamList.values[x][1])>
+						<cfloop from="2" to="#ArrayLen(teamList.values)#" index="x">
+						#listteams#<br/>
+							<cfif !listFind(listTeams,teamList.values[x][1])>
 								<cfset teamID = teamList.values[x][2]>
 								<cfset teamLocation = ((x - 2) * 7) + 2>
 								<cfset teamMatchupLocation = x>
