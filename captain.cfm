@@ -110,7 +110,9 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 	<cfset structCOLOR["Validity Gaming"] 		= "05fea8">
 	<cfset structCOLOR["Insight Gaming"]  		= "622D75">
 
+<cfset teamList = getTeamID(session.token.access_token)>
 	<!--- set the range for which map pool to pick from --->
+	
 	<cfif isDefined('form.week') AND isDefined('form.team')>
 		<cfif form.week eq "1">
 			<cfset range="B2:B8">
@@ -202,8 +204,6 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 		<cfset aryMapSlot[6][2] = weekMaps.values[5][1]>
 		<cfset aryMapSlot[7][2] = weekMaps.values[6][1]>
 		
-		<!--- get total team list --->
-		<cfset teamList = getTeamID(session.token.access_token)>
 		<!--- get specificied team from list --->
 		<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
 			<cfif form.team EQ teamList.values[i][1]>
@@ -951,19 +951,22 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 					</tr>
 					<tr>
 						<td colspan="2" align="center">
-							<div align="left" style="width:80%">
-								<input type="radio" id="lineup" name="type" value="lineup" required="true">Submit / Edit Weekly Lineup - BETA<br/>
-								<input type="radio" id="scores" name="type" value="scores">Submit / Edit Weekly Match Scores - ALPHA<br/>
-								<cfif url.access EQ trim(hash('ADMIN'))>
-									------------------------------------------------<br/>
-									<input type="radio" id="display,fullLineup" name="type" value="display,fullLineup"><label for="display,fullLineup">VIEW ALL LINEUP CODE FOR WEEK</label><br/>
-									<input type="radio" id="display,lineup" 	name="type" value="display,lineup"><label for="display,lineup">View Lineup Code for Matchup - BETA</label><br/>
-									<input type="radio" id="display,scores" 	name="type" value="display,scores"><label for="display,scores">View Score Code for Matchup - IN DEV</label><br/>
-									<input type="radio" id="display,status" 	name="type" value="display,status"><label for="display,status">View Team Submission Status ) - IN DEV</label><br/>
-									------------------------------------------------<br/>
-									<input type="radio" id="lock" 				name="type" value="lock"><label for="lock">Lock Lineups</label><br/>
-									<input type="radio" id="unlock" 			name="type" value="unlock"><label for="unlock">Unlock Lineups</label>
-								</cfif>
+							<br/>
+							<div align="center">
+								<div align="left" style="width:80%">
+									<input type="radio" id="lineup" name="type" value="lineup" required="true">Submit / Edit Weekly Lineup - BETA<br/>
+									<input type="radio" id="scores" name="type" value="scores">Submit / Edit Weekly Match Scores - ALPHA<br/>
+									<cfif url.access EQ trim(hash('ADMIN'))>
+										------------------------------------------------<br/>
+										<input type="radio" id="display,fullLineup" name="type" value="display,fullLineup"><label for="display,fullLineup">VIEW ALL LINEUP CODE FOR WEEK</label><br/>
+										<input type="radio" id="display,lineup" 	name="type" value="display,lineup"><label for="display,lineup">View Lineup Code for Matchup - BETA</label><br/>
+										<input type="radio" id="display,scores" 	name="type" value="display,scores"><label for="display,scores">View Score Code for Matchup - IN DEV</label><br/>
+										<input type="radio" id="display,status" 	name="type" value="display,status"><label for="display,status">View Team Submission Status ) - ALPHA</label><br/>
+										------------------------------------------------<br/>
+										<input type="radio" id="lock" 				name="type" value="lock"><label for="lock">Lock Lineups</label><br/>
+										<input type="radio" id="unlock" 			name="type" value="unlock"><label for="unlock">Unlock Lineups</label>
+									</cfif>
+								</div>
 							</div>
 						</td>
 					</tr>
