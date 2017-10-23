@@ -946,7 +946,8 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 							<input type="radio" id="display,lineup" name="type" value="display,lineup">View Lineup Code for Matchup - BETA<br/>
 							<input type="radio" id="display,scores" name="type" value="display,scores">View Score Code for Matchup - IN DEV<br/>
 							<input type="radio" id="display,status" name="type" value="display,status">View Team Submission Status (team selection ignored) - IN DEV<br/>
-							<input type="button" name="lockLineups" id="lockLineups" onclick="#setLocked(session.token.access_token,'yes')#">Lock Lineups</input> - <input type="button" name="unlockLineups" id="unlockLineups" onclick="#setLocked(session.token.access_token,'no')#">Unlock Lineups</input>
+							<input type="radio" id="display,fulllineup" name="type" value="display,fullLineup">VIEW ALL LINEUP CODE FOR WEEK<br/>
+							<button name="lockLineups" id="lockLineups" onclick="#setLocked(session.token.access_token,'yes')#">Lock Lineups</button> - <button name="unlockLineups" id="unlockLineups" onclick="#setLocked(session.token.access_token,'no')#">Unlock Lineups</button>
 						</cfif>
 					</div>
 				</div>
