@@ -793,7 +793,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 									<div align="center">
 										<table width="60%" cellpadding="5">
 											<tr>
-												<td colspan="3" align="center">#form.team# vs #oppTeam.values[1][1]#
+												<td colspan="3" align="center">#Team1Name# vs #oppTeam.values[1][1]#
 												</td>
 											</tr>
 											<cfloop from="1" to="7" index="i">
@@ -825,7 +825,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 											TLpad="{{Box|break|padding=2em}} <br />";
 											TLpad+="{{TeamMatch <br />";
 											TLpad+="|width=300 <br />";
-											TLpad+="|team1=#form.team# <br />";
+											TLpad+="|team1=#team1Name# <br />";
 											TLpad+="|team2=#oppTeam.values[1][1]# <br />";
 											TLpad+="|teamwin= <br />";
 											TLpad+="|date= <br />";
@@ -862,8 +862,8 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 												wikiPad+='&lt;img src="<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">#structIMG["random"]#<cfelse>#structIMG[ListGetAt(weekResults2.values[i][1],5,"|")]#</cfif>" /&gt; &lt;a href="#ListGetAt(weekResults2.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults2.values[i][1],1,"|")# | #ListGetAt(weekResults2.values[i][1],2,"|")#&lt;/a&gt; vs. &lt;a href="#ListGetAt(weekResults1.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults1.values[i][1],1,"|")# | #ListGetAt(weekResults1.values[i][1],2,"|")#&lt;/a&gt; &lt;img src="<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">#structIMG["Random"]#<cfelse>#structIMG[ListGetAt(weekResults1.values[i][1],5,"|")]#</cfif>" /&gt; &lt;i&gt;[#aryMapSlot[i][2]#&lt;/i&gt;&lt;br /&gt <br />';
 											</cfloop>
 											
-											document.getElementById("TL").innerHTML += TLpad;
-											document.getElementById("wiki").innerHTML += wikiPad;
+											document.getElementById("TL#x#").innerHTML = TLpad;
+											document.getElementById("wiki#x#").innerHTML = wikiPad;
 										</script>
 									</cfif>
 								<cfelse>
@@ -880,10 +880,17 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 								<td align="center">
 									<div id="TL" style="border-style:solid;width:600px;">
 									==={{HiddenSort|Week#form.week#}}===<br/>
+									<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
+										<div id="TL#i#">&nbsp;</div>
+									</cfloop>
+								
 									</div>
 								</td>
 								<td align="center">
 									<div id="wiki" style="border-style:solid;width:600px;">
+									<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
+										<div id="wiki#i#">&nbsp;</div>
+									</cfloop>
 									</div>
 								</td>
 							</tr>
