@@ -943,11 +943,12 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 						<input type="radio" id="lineup" name="type" value="lineup" required="true">Submit / Edit Weekly Lineup - BETA<br/>
 						<input type="radio" id="scores" name="type" value="scores">Submit / Edit Weekly Match Scores - ALPHA<br/>
 						<cfif url.access EQ trim(hash('ADMIN'))>
-							<input type="radio" id="display,lineup" name="type" value="display,lineup">View Lineup Code for Matchup - BETA<br/>
-							<input type="radio" id="display,scores" name="type" value="display,scores">View Score Code for Matchup - IN DEV<br/>
-							<input type="radio" id="display,status" name="type" value="display,status">View Team Submission Status (team selection ignored) - IN DEV<br/>
-							<input type="radio" id="display,fulllineup" name="type" value="display,fullLineup">VIEW ALL LINEUP CODE FOR WEEK<br/>
-							<button name="lockLineups" id="lockLineups" onclick="#setLocked(session.token.access_token,'yes')#">Lock Lineups</button> - <button name="unlockLineups" id="unlockLineups" onclick="#setLocked(session.token.access_token,'no')#">Unlock Lineups</button>
+							<input type="radio" id="display,lineup" 	name="type" value="display,lineup"><label for="display,lineup">View Lineup Code for Matchup - BETA</label><br/>
+							<input type="radio" id="display,scores" 	name="type" value="display,scores"><label for="display,scores">View Score Code for Matchup - IN DEV</label><br/>
+							<input type="radio" id="display,status" 	name="type" value="display,status"><label for="display,status">View Team Submission Status (team selection ignored) - IN DEV</label><br/>
+							<input type="radio" id="display,fullLineup" name="type" value="display,fullLineup"><label for="display,fullLineup">VIEW ALL LINEUP CODE FOR WEEK</label><br/>
+							<input type="radio" id="lock" 				name="type" value="lock"><label for="lock">Lock Lineups</label><br/>
+							<input type="radio" id="unlock" 			name="type" value="unlock"><label for="unlock">Unlock Lineups</label>
 						</cfif>
 					</div>
 				</div>
