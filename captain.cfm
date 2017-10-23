@@ -767,108 +767,108 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 								<cfset teamLocation = ((x - 2) * 7) + 2>
 								<cfset teamMatchupLocation = x>
 								<cfset team1Name = teamList.values[x][1]>
-								<cfset listTeams = listAppend(listTeams, teamList.values[x][1])>
-							</cfif>
-							<cfset getLineupRange 	= alpha["lineup#form.week#"]  & toString(teamLocation) & ":" & alpha["lineup#form.week#"] & toString((teamLocation + 6))>
-							<cfset submitLineupRage = alpha["lineup#form.week#"]  & toString(teamLocation)>
-							<cfset getScoreRange 	= alpha["lineup#form.week#"]  & toString(teamLocation) & ":" & alpha["score#form.week#"] & toString((teamLocation + 6))>
-							<cfset submitScoreRange = alpha["score#form.week#"]   & toString(teamLocation)>
-							<cfset getMatchupRange 	= alpha["matchup#form.week#"] & toString(teamMatchupLocation)>
-							<cfset roster			= getTeamRoster(session.token.access_token, teamID)>
-							<cfset oppTeam = getWeekMatchup(session.token.access_token,getMatchupRange)>
-							<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
-								<cfif oppTeam.values[1][1] EQ teamList.values[i][1]>
-									<cfset team2ID = teamList.values[i][2]>
-									<cfset team2Location = ((i - 2) * 7) + 2>
-									<cfset team2MatchupLocation = i>
-									<cfset team2Name = teamList.values[i][1]>
-									<cfset listTeams = listAppend(listTeams, teamList.values[i][1])>
-								</cfif>
-							</cfloop>	
-							<cfset getScoreRange2 	= alpha["lineup#form.week#"]  & toString(team2Location) & ":" & alpha["score#form.week#"] & toString((team2Location + 6))>
-							<cfset weekResults1 	= getWeeklyLineup(session.token.access_token,getScoreRange)>
-							<cfset weekResults2 	= getWeeklyLineup(session.token.access_token,getScoreRange2)>
-							<cfset get2Lock = getIsLocked(session.token.access_token,"C#team2MatchupLocation#")>
-							<cfif get2Lock.values[1][1] EQ "yes">
-								<cfif url.access EQ trim(hash('ADMIN'))>
-								<div align="center">
-									<table width="60%" cellpadding="5">
-										<tr>
-											<td colspan="3" align="center">#form.team# vs #oppTeam.values[1][1]#
-											</td>
-										</tr>
-										<cfloop from="1" to="7" index="i">
-											<cfif i EQ "1">
-												<cfset bg="##d6c31d"> <cfset text="black">
-											<cfelseif i EQ "2" OR i EQ "3">
-												<cfset bg="##9b9b96"> <cfset text="black">
-											<cfelseif i EQ "4" OR i EQ "5" OR i EQ "6">
-												<cfset bg="##5f8eaf"> <cfset text="white">
-											<cfelseif i EQ "7">
-												<cfset bg="##2ebedb"> <cfset text="black">
-											</cfif>
-											<tr style="background-color:#bg#;color:#text#;" height="25px">
-												<td align="center">
-													#ListGetAt(weekResults1.values[i][1],1,"|")#
-												</td>
-												<td align="center">
-													#aryMapSlot[i][2]#
-												</td>
-												<td align="center">
-													#ListGetAt(weekResults2.values[i][1],1,"|")#
+									<cfset listTeams = listAppend(listTeams, teamList.values[x][1])>
+								<cfset getLineupRange 	= alpha["lineup#form.week#"]  & toString(teamLocation) & ":" & alpha["lineup#form.week#"] & toString((teamLocation + 6))>
+								<cfset submitLineupRage = alpha["lineup#form.week#"]  & toString(teamLocation)>
+								<cfset getScoreRange 	= alpha["lineup#form.week#"]  & toString(teamLocation) & ":" & alpha["score#form.week#"] & toString((teamLocation + 6))>
+								<cfset submitScoreRange = alpha["score#form.week#"]   & toString(teamLocation)>
+								<cfset getMatchupRange 	= alpha["matchup#form.week#"] & toString(teamMatchupLocation)>
+								<cfset roster			= getTeamRoster(session.token.access_token, teamID)>
+								<cfset oppTeam = getWeekMatchup(session.token.access_token,getMatchupRange)>
+								<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
+									<cfif oppTeam.values[1][1] EQ teamList.values[i][1]>
+										<cfset team2ID = teamList.values[i][2]>
+										<cfset team2Location = ((i - 2) * 7) + 2>
+										<cfset team2MatchupLocation = i>
+										<cfset team2Name = teamList.values[i][1]>
+										<cfset listTeams = listAppend(listTeams, teamList.values[i][1])>
+									</cfif>
+								</cfloop>	
+								<cfset getScoreRange2 	= alpha["lineup#form.week#"]  & toString(team2Location) & ":" & alpha["score#form.week#"] & toString((team2Location + 6))>
+								<cfset weekResults1 	= getWeeklyLineup(session.token.access_token,getScoreRange)>
+								<cfset weekResults2 	= getWeeklyLineup(session.token.access_token,getScoreRange2)>
+								<cfset get2Lock = getIsLocked(session.token.access_token,"C#team2MatchupLocation#")>
+								<cfif get2Lock.values[1][1] EQ "yes">
+									<cfif url.access EQ trim(hash('ADMIN'))>
+									<div align="center">
+										<table width="60%" cellpadding="5">
+											<tr>
+												<td colspan="3" align="center">#form.team# vs #oppTeam.values[1][1]#
 												</td>
 											</tr>
-										</cfloop>
-									</table>
-								</div>
-									<script>
-										var TLpad;
-										TLpad="{{Box|break|padding=2em}} <br />";
-										TLpad+="{{TeamMatch <br />";
-										TLpad+="|width=300 <br />";
-										TLpad+="|team1=#form.team# <br />";
-										TLpad+="|team2=#oppTeam.values[1][1]# <br />";
-										TLpad+="|teamwin= <br />";
-										TLpad+="|date= <br />";
-										TLpad+="|lrthread= <br />";
-										<cfloop from="1" to="7" index="i">
-											TLpad+="&lt;!-- Match #i# \--\> <br />";
-											<cfif i NEQ 7>
-												TLpad+="|m#i#p1=#ListGetAt(weekResults1.values[i][1],1,"|")# [[File:<cfif aryMapSlot[i][1] eq "Diamond 2/3">Diamond<cfelse>#aryMapSlot[i][1]#</cfif>-medium.png|17px]] |m#i#p1race=<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults1.values[i][1],5,"|"),1)#</cfif> |m#i#p1flag=ff |m#i#p1link=false <br />";
-												TLpad+="|m#i#p2=[[File:<cfif aryMapSlot[i][1] eq "Diamond 2/3">Diamond<cfelse>#aryMapSlot[i][1]#</cfif>-medium.png|17px]] #ListGetAt(weekResults2.values[i][1],1,"|")# |m#i#p2race=<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults2.values[i][1],5,"|"),1)#</cfif> |m#i#p2flag=ff |m#i#p2link=false <br />";
-												TLpad+="|m#i#map=#aryMapSlot[i][2]#<br />";
-												TLpad+="|m#i#win=";
-											<cfelse>
-												TLpad+="|ace1p1=#ListGetAt(weekResults1.values[i][1],1,"|")# [[File:MasterMedium.png|17px]] |ace1p1race=<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults1.values[i][1],5,"|"),1)#</cfif> |ace1p1flag=ff |ace1p1link=false <br />";
-												TLpad+="|ace1p2=[[File:MasterMedium.png|17px]] #ListGetAt(weekResults2.values[i][1],1,"|")# |ace1p2race=<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults2.values[i][1],5,"|"),1)#</cfif> |ace1p2flag=ff |ace1p2link=false <br />";
-												TLpad+="|ace1map=#aryMapSlot[i][2]# LE <br />";
-												TLpad+="|ace1win= <br />";
-												TLpad+="\&lt;!-- Match 8 --> <br />";
-												TLpad+="|ace2p1=#ListGetAt(weekResults1.values[i][1],1,"|")# [[File:MasterMedium.png|17px]] |ace2p1race=<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults1.values[i][1],5,"|"),1)#</cfif> |ace2p1flag=ff |ace2p1link=false <br />";
-												TLpad+="|ace2p2=[[File:MasterMedium.png|17px]] #ListGetAt(weekResults2.values[i][1],1,"|")# |ace2p2race=<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults2.values[i][1],5,"|"),1)#</cfif> |ace2p2flag=ff |ace2p2link=false <br />";
-												TLpad+="|ace2map= <br />";
-												TLpad+="|ace2win= <br />";
-												TLpad+="\&lt;!--Match 9 --> <br />";
-												TLpad+="|ace3p1= [[File:MasterMedium.png|17px]] |ace3p1race=<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults1.values[i][1],5,"|"),1)#</cfif> |ace3p1flag=ff |ace3p1link=false <br />";
-												TLpad+="|ace3p2=[[File:MasterMedium.png|17px]] |ace3p2race=<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults2.values[i][1],5,"|"),1)#</cfif> |ace3p2flag=ff |ace3p2link=false <br />";
-												TLpad+="|ace3map= <br />";
-												TLpad+="|ace3win= <br />";
-												TLpad+="}} <br />";
-											</cfif>
-										</cfloop>
-										
-										var wikiPad;
-										wikiPad='&lt;h1&gt;&lt;img src="#structIMG[oppTeam.values[1][1]]#" /&gt; &lt;span style="color: ###structCOLOR[oppTeam.values[1][1]]#;"&gt;#oppTeam.values[1][1]#&lt;/span&gt; vs &lt;span style="color: ###structCOLOR[form.team]#;"&gt;#form.team#&lt;/span&gt;&lt;img src="#structIMG[form.team]#" /&gt;&lt;/h1&gt; <br />';
-										<cfloop from="1" to="7" index="i">
-											wikiPad+='&lt;img src="<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">#structIMG["random"]#<cfelse>#structIMG[ListGetAt(weekResults2.values[i][1],5,"|")]#</cfif>" /&gt; &lt;a href="#ListGetAt(weekResults2.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults2.values[i][1],1,"|")# | #ListGetAt(weekResults2.values[i][1],2,"|")#&lt;/a&gt; vs. &lt;a href="#ListGetAt(weekResults1.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults1.values[i][1],1,"|")# | #ListGetAt(weekResults1.values[i][1],2,"|")#&lt;/a&gt; &lt;img src="<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">#structIMG["Random"]#<cfelse>#structIMG[ListGetAt(weekResults1.values[i][1],5,"|")]#</cfif>" /&gt; &lt;i&gt;[#aryMapSlot[i][2]#&lt;/i&gt;&lt;br /&gt <br />';
-										</cfloop>
-										
-										document.getElementById("TL").innerHTML += TLpad;
-										document.getElementById("wiki").innerHTML += wikiPad;
-									</script>
+											<cfloop from="1" to="7" index="i">
+												<cfif i EQ "1">
+													<cfset bg="##d6c31d"> <cfset text="black">
+												<cfelseif i EQ "2" OR i EQ "3">
+													<cfset bg="##9b9b96"> <cfset text="black">
+												<cfelseif i EQ "4" OR i EQ "5" OR i EQ "6">
+													<cfset bg="##5f8eaf"> <cfset text="white">
+												<cfelseif i EQ "7">
+													<cfset bg="##2ebedb"> <cfset text="black">
+												</cfif>
+												<tr style="background-color:#bg#;color:#text#;" height="25px">
+													<td align="center">
+														#ListGetAt(weekResults1.values[i][1],1,"|")#
+													</td>
+													<td align="center">
+														#aryMapSlot[i][2]#
+													</td>
+													<td align="center">
+														#ListGetAt(weekResults2.values[i][1],1,"|")#
+													</td>
+												</tr>
+											</cfloop>
+										</table>
+									</div>
+										<script>
+											var TLpad;
+											TLpad="{{Box|break|padding=2em}} <br />";
+											TLpad+="{{TeamMatch <br />";
+											TLpad+="|width=300 <br />";
+											TLpad+="|team1=#form.team# <br />";
+											TLpad+="|team2=#oppTeam.values[1][1]# <br />";
+											TLpad+="|teamwin= <br />";
+											TLpad+="|date= <br />";
+											TLpad+="|lrthread= <br />";
+											<cfloop from="1" to="7" index="i">
+												TLpad+="&lt;!-- Match #i# \--\> <br />";
+												<cfif i NEQ 7>
+													TLpad+="|m#i#p1=#ListGetAt(weekResults1.values[i][1],1,"|")# [[File:<cfif aryMapSlot[i][1] eq "Diamond 2/3">Diamond<cfelse>#aryMapSlot[i][1]#</cfif>-medium.png|17px]] |m#i#p1race=<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults1.values[i][1],5,"|"),1)#</cfif> |m#i#p1flag=ff |m#i#p1link=false <br />";
+													TLpad+="|m#i#p2=[[File:<cfif aryMapSlot[i][1] eq "Diamond 2/3">Diamond<cfelse>#aryMapSlot[i][1]#</cfif>-medium.png|17px]] #ListGetAt(weekResults2.values[i][1],1,"|")# |m#i#p2race=<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults2.values[i][1],5,"|"),1)#</cfif> |m#i#p2flag=ff |m#i#p2link=false <br />";
+													TLpad+="|m#i#map=#aryMapSlot[i][2]#<br />";
+													TLpad+="|m#i#win=";
+												<cfelse>
+													TLpad+="|ace1p1=#ListGetAt(weekResults1.values[i][1],1,"|")# [[File:MasterMedium.png|17px]] |ace1p1race=<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults1.values[i][1],5,"|"),1)#</cfif> |ace1p1flag=ff |ace1p1link=false <br />";
+													TLpad+="|ace1p2=[[File:MasterMedium.png|17px]] #ListGetAt(weekResults2.values[i][1],1,"|")# |ace1p2race=<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults2.values[i][1],5,"|"),1)#</cfif> |ace1p2flag=ff |ace1p2link=false <br />";
+													TLpad+="|ace1map=#aryMapSlot[i][2]# LE <br />";
+													TLpad+="|ace1win= <br />";
+													TLpad+="\&lt;!-- Match 8 --> <br />";
+													TLpad+="|ace2p1=#ListGetAt(weekResults1.values[i][1],1,"|")# [[File:MasterMedium.png|17px]] |ace2p1race=<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults1.values[i][1],5,"|"),1)#</cfif> |ace2p1flag=ff |ace2p1link=false <br />";
+													TLpad+="|ace2p2=[[File:MasterMedium.png|17px]] #ListGetAt(weekResults2.values[i][1],1,"|")# |ace2p2race=<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults2.values[i][1],5,"|"),1)#</cfif> |ace2p2flag=ff |ace2p2link=false <br />";
+													TLpad+="|ace2map= <br />";
+													TLpad+="|ace2win= <br />";
+													TLpad+="\&lt;!--Match 9 --> <br />";
+													TLpad+="|ace3p1= [[File:MasterMedium.png|17px]] |ace3p1race=<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults1.values[i][1],5,"|"),1)#</cfif> |ace3p1flag=ff |ace3p1link=false <br />";
+													TLpad+="|ace3p2=[[File:MasterMedium.png|17px]] |ace3p2race=<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults2.values[i][1],5,"|"),1)#</cfif> |ace3p2flag=ff |ace3p2link=false <br />";
+													TLpad+="|ace3map= <br />";
+													TLpad+="|ace3win= <br />";
+													TLpad+="}} <br />";
+												</cfif>
+											</cfloop>
+											
+											var wikiPad;
+											wikiPad='&lt;h1&gt;&lt;img src="#structIMG[oppTeam.values[1][1]]#" /&gt; &lt;span style="color: ###structCOLOR[oppTeam.values[1][1]]#;"&gt;#oppTeam.values[1][1]#&lt;/span&gt; vs &lt;span style="color: ###structCOLOR[form.team]#;"&gt;#form.team#&lt;/span&gt;&lt;img src="#structIMG[form.team]#" /&gt;&lt;/h1&gt; <br />';
+											<cfloop from="1" to="7" index="i">
+												wikiPad+='&lt;img src="<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">#structIMG["random"]#<cfelse>#structIMG[ListGetAt(weekResults2.values[i][1],5,"|")]#</cfif>" /&gt; &lt;a href="#ListGetAt(weekResults2.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults2.values[i][1],1,"|")# | #ListGetAt(weekResults2.values[i][1],2,"|")#&lt;/a&gt; vs. &lt;a href="#ListGetAt(weekResults1.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults1.values[i][1],1,"|")# | #ListGetAt(weekResults1.values[i][1],2,"|")#&lt;/a&gt; &lt;img src="<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">#structIMG["Random"]#<cfelse>#structIMG[ListGetAt(weekResults1.values[i][1],5,"|")]#</cfif>" /&gt; &lt;i&gt;[#aryMapSlot[i][2]#&lt;/i&gt;&lt;br /&gt <br />';
+											</cfloop>
+											
+											document.getElementById("TL").innerHTML += TLpad;
+											document.getElementById("wiki").innerHTML += wikiPad;
+										</script>
+									</cfif>
+								<cfelse>
+									<div align="center">#team2Name#'s lineup isn't locked. Please lock lineups before proceeding.</div>
 								</cfif>
-							<cfelse>
-								<div align="center">#team2Name# Has not yet submitted their lineup. Full matchup can be viewed after.</div>
 							</cfif>
 						</cfloop>
 						<table width="100%">
