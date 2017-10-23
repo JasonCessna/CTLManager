@@ -267,6 +267,12 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 	-------
 	 ----->
 	<cfswitch expression="#left(url.section,7)#">
+		<cfcase value="lock">
+			<cfset push = setLocked(session.token.access_token,'yes')>
+		</cfcase>
+		<cfcase value="unlock">
+			<cfset push = setLocked(session.token.access_token,'no')>
+		</cfcase>
 	 <!------------------------
 		--------------------------
 				LINEUPS
