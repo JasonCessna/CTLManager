@@ -568,6 +568,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 										TLpad+="|m#i#p1=#ListGetAt(weekResults1.values[i][1],1,"|")# [[File:#aryMapSlot[i][1]#-medium.png|17px]] |m#i#p1race=<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults1.values[i][1],5,"|"),1)#</cfif> |m#i#p1flag=ff |m#i#p1link=false <br />";
 										TLpad+="|m#i#p2=[[File:#aryMapSlot[i][1]#-medium.png|17px]] #ListGetAt(weekResults2.values[i][1],1,"|")# |m#i#p2race=<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults2.values[i][1],5,"|"),1)#</cfif> |m#i#p2flag=ff |m#i#p2link=false <br />";
 										TLpad+="|m#i#map=#aryMapSlot[i][2]#<br />";
+										TLpad+="|m#i#win=";
 									<cfelse>
 										TLpad+="|ace1p1=#ListGetAt(weekResults1.values[i][1],1,"|")# [[File:MasterMedium.png|17px]] |ace1p1race=<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults1.values[i][1],5,"|"),1)#</cfif> |ace1p1flag=ff |ace1p1link=false <br />";
 										TLpad+="|ace1p2=[[File:MasterMedium.png|17px]] #ListGetAt(weekResults2.values[i][1],1,"|")# |ace1p2race=<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">R<cfelse>#Left(ListGetAt(weekResults2.values[i][1],5,"|"),1)#</cfif> |ace1p2flag=ff |ace1p2link=false <br />";
