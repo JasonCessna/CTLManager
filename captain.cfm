@@ -904,70 +904,72 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 		------------------------->
 		<cfdefaultcase>
 			<cfform name="frmTemplate" method="POST" action="http://www.duttles.com/captain.cfm?access=#accessLevel#">
-			<div align="center" style="width:30%;">
-				<h1>Create Template For Lineup Submission</h1>
-				<div id="weekSelectDiv" align="center" style="float:left">
-					
-					<div>Select Week</div>
-					<div>
-						<select name="week" id="week" align="center">
-							<option value="1">Week 1</option>
-							<option value="2">Week 2</option>
-							<option value="3">Week 3</option>
-							<option value="4">Week 4</option>
-							<option value="5">Week 5</option>
-							<option value="6">Week 6</option>
-							<option value="7">Week 7</option>
-							<option value="8">Week 8</option>
-							<option value="9">Week 9</option>
-							<option value="10">Week 10</option>
-							<option value="11">Round of 6</option>
-							<option value="12">Semi-Finals</option>
-							<option value="13">Finals</option>
-						</select>
-					</div>
-				</div>
-				<cfif url.access EQ trim(hash('ADMIN'))>
-					<div id="teamSelectDiv" align="center" style="float:right">
-						<div>Select Team</div>
-						<div>
-							<select name="team" id="team" align="center">
-							<cfloop from="2" to="#arrayLen(teamList.values)#" index="i">
-								<option value="#teamList.values[i][1]#">#teamList.values[i][1]#</option>
-								<!---
-								<option value="All-Inspiration">All-Inspiration</option>
-								<option value="Born Gosu">Born Gosu</option>
-								<option value="The Confederation">The Confederation</option>
-								<option value="Daily Life">Daily Life</option>
-								<option value="Formless Bearsloths">Formless Bearsloths</option>
-								<option value="Guns And Roaches">Guns And Roaches</option>
-								<option value="Insight Gaming">Insight Gaming</option>
-								<option value="LiT Esports">LiT Esports</option>
-								<option value="Psionic Aftermath">Psionic Aftermath</option>
-								<option value="Taste the Bacon">Taste the Bacon</option>
-								<option value="Team UnRivaled">Team UnRivaled</option>
-								<option value="Validity Gaming">Validity Gaming</option>
-								--->
-							</cfloop>
-							</select>
+			<div align="center">
+				<table>
+					<tr>
+						<td colspan="2" align="center">
+							<h1>Create Template For Lineup Submission</h1>
+						</td>
+					</tr>
+				<tr>
+					<td align="center">
+						<div>Select Week</div>
+							<div>
+								<select name="week" id="week" align="center" style="width:150">
+									<option value="1">Week 1</option>
+									<option value="2">Week 2</option>
+									<option value="3">Week 3</option>
+									<option value="4">Week 4</option>
+									<option value="5">Week 5</option>
+									<option value="6">Week 6</option>
+									<option value="7">Week 7</option>
+									<option value="8">Week 8</option>
+									<option value="9">Week 9</option>
+									<option value="10">Week 10</option>
+									<option value="11">Round of 6</option>
+									<option value="12">Semi-Finals</option>
+									<option value="13">Finals</option>
+								</select>
+							</div>
 						</div>
+					</td>
+					<cfif url.access EQ trim(hash('ADMIN'))>
+						<td align="center">
+						<div id="teamSelectDiv" align="center">
+							<div>Select Team</div>
+							<div>
+								<select name="team" id="team" align="center" style="width:150">
+								<cfloop from="2" to="#arrayLen(teamList.values)#" index="i">
+									<option value="#teamList.values[i][1]#">#teamList.values[i][1]#</option>
+								</cfloop>
+								</select>
+							</div>
+						</td>
 					<cfelse>
 						<input type="hidden" name="team" id="team" value="#url.teamAccess#">
 					</cfif>
-					<div align="left" style="width:40%">
-						<input type="radio" id="lineup" name="type" value="lineup" required="true">Submit / Edit Weekly Lineup - BETA<br/>
-						<input type="radio" id="scores" name="type" value="scores">Submit / Edit Weekly Match Scores - ALPHA<br/>
-						<cfif url.access EQ trim(hash('ADMIN'))>
-							<input type="radio" id="display,lineup" 	name="type" value="display,lineup"><label for="display,lineup">View Lineup Code for Matchup - BETA</label><br/>
-							<input type="radio" id="display,scores" 	name="type" value="display,scores"><label for="display,scores">View Score Code for Matchup - IN DEV</label><br/>
-							<input type="radio" id="display,status" 	name="type" value="display,status"><label for="display,status">View Team Submission Status (team selection ignored) - IN DEV</label><br/>
-							<input type="radio" id="display,fullLineup" name="type" value="display,fullLineup"><label for="display,fullLineup">VIEW ALL LINEUP CODE FOR WEEK</label><br/>
-							<input type="radio" id="lock" 				name="type" value="lock"><label for="lock">Lock Lineups</label><br/>
-							<input type="radio" id="unlock" 			name="type" value="unlock"><label for="unlock">Unlock Lineups</label>
-						</cfif>
-					</div>
-				</div>
-				<div align="center" style="float:bottom">
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							<div align="left" style="width:80%">
+								<input type="radio" id="lineup" name="type" value="lineup" required="true">Submit / Edit Weekly Lineup - BETA<br/>
+								<input type="radio" id="scores" name="type" value="scores">Submit / Edit Weekly Match Scores - ALPHA<br/>
+								<cfif url.access EQ trim(hash('ADMIN'))>
+									------------------------------------------------<br/>
+									<input type="radio" id="display,fullLineup" name="type" value="display,fullLineup"><label for="display,fullLineup">VIEW ALL LINEUP CODE FOR WEEK</label><br/>
+									<input type="radio" id="display,lineup" 	name="type" value="display,lineup"><label for="display,lineup">View Lineup Code for Matchup - BETA</label><br/>
+									<input type="radio" id="display,scores" 	name="type" value="display,scores"><label for="display,scores">View Score Code for Matchup - IN DEV</label><br/>
+									<input type="radio" id="display,status" 	name="type" value="display,status"><label for="display,status">View Team Submission Status ) - IN DEV</label><br/>
+									------------------------------------------------<br/>
+									<input type="radio" id="lock" 				name="type" value="lock"><label for="lock">Lock Lineups</label><br/>
+									<input type="radio" id="unlock" 			name="type" value="unlock"><label for="unlock">Unlock Lineups</label>
+								</cfif>
+							</div>
+						</td>
+					</tr>
+				</table>
+						
+				<div align="center">
 					<input type="submit" name="submit" id="submit" value="SUBMIT">
 				</div>
 			</div>
