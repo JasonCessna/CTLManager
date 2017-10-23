@@ -83,6 +83,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 		var result = h.send().getPrefix();
 		return deserializeJSON(result.filecontent.toString());
 	}
+	
 	public function getTeamID(accesstoken) {
 	
 		var h = new http();
@@ -251,7 +252,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	<cfreturn cfhttp.filecontent>
  </cffunction>
  
-  <cffunction name="pushTeamSubmitted">
+<cffunction name="pushTeamSubmitted">
 	<cfargument name="accesstoken">
 	<cfargument name="range">
 	<cfset postBody = '{
@@ -264,10 +265,28 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 		<cfhttpparam type="URL" name="valueInputOption" value="USER_ENTERED">
 		<cfhttpparam type="body" value="#postBody#">
 	</cfhttp>
-<cfset response = cfhttp>
+	<cfset response = cfhttp>
 	<cfreturn cfhttp.filecontent>
- </cffunction>
+</cffunction>
  
+<cffunction name="setLocked">
+<cfoutput>
+	<cfargument name="accesstoken">
+	<cfargument name="lockValue">
+	<cfset postBody = '{
+                  "range": "Master!C2:C13",
+		  "majorDimension": "COLUMNS",
+                  "values": [	["#arguments.lockValue#"]]}'>
+	<cfhttp method="put" url="https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values/Master!C2:C13">
+		<cfhttpparam type="header" name="Authorization" value="OAuth #arguments.accesstoken#"><cfhttpparam name="Content-Type" type="header" value="application/json"> 
+		<cfhttpparam type="header" name="GData-Version" value="3">
+		<cfhttpparam type="URL" name="valueInputOption" value="USER_ENTERED">
+		<cfhttpparam type="body" value="#postBody#">
+	</cfhttp>
+	<cfset response = cfhttp>
+	<cfreturn cfhttp.filecontent>
+</cfoutput>
+ </cffunction>
  <cffunction name="getRefreshToken"> 
 	<cfargument name="refresh" required="false" default="" type="string"> 
 	<cfset var postBody = "client_id=" & UrlEncodedFormat(application.clientid) & "&"> 
