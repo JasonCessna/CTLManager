@@ -13,13 +13,12 @@ BEGIN HEADER
 <cfif isDefined('form.type')>
 	<cfif left(form.type,7) EQ "display">
 		<cfset url.displayType = listgetat(form.type, 2, ",")>
-		<cfelseif form.type eq "lock">
-			<cfset push = setLocked(session.token.access_token,'yes')>
-			<center>Lineups have been locked.</center>
-		<cfelseif form.type eq "unlock">
-			<cfset push = setLocked(session.token.access_token,'no')>
-			<center>Lineups have been unlocked.</center>
-		</cfcase>
+	<cfelseif form.type eq "lock">
+		<cfset push = setLocked(session.token.access_token,'yes')>
+		<center>Lineups have been locked.</center>
+	<cfelseif form.type eq "unlock">
+		<cfset push = setLocked(session.token.access_token,'no')>
+		<center>Lineups have been unlocked.</center>
 	</cfif>
 </cfif>
 <cfparam name="url.access" default="none">
