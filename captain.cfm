@@ -877,21 +877,17 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 								<th><h1>CTL Website Code For Lineups:</h1></h1>
 							</tr>
 							<tr valign="top">
-								<td align="center">
-									<div id="TL" style="border-style:solid;width:600px;">
+								<td align="center" style="broder-style:solid; width:600px;">
 									==={{HiddenSort|Week#form.week#}}===<br/>
 									<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
 										<div id="TL#i#">&nbsp;</div>
 									</cfloop>
 								
-									</div>
 								</td>
-								<td align="center">
-									<div id="wiki" style="border-style:solid;width:600px;">
+								<td align="center" style="border-style:solid;width:600px;">
 									<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
 										<div id="wiki#i#">&nbsp;</div>
 									</cfloop>
-									</div>
 								</td>
 							</tr>
 						</table>
