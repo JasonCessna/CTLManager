@@ -928,7 +928,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 					</div>
 				</div>
 				<cfif url.access EQ trim(hash('ADMIN'))>
-					<div id="teamSelectDiv" align="center" style="float:left">
+					<div id="teamSelectDiv" align="center" style="float:right">
 						<div>Select Team</div>
 						<div>
 							<select name="team" id="team" align="center">
@@ -954,7 +954,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 					<cfelse>
 						<input type="hidden" name="team" id="team" value="#url.teamAccess#">
 					</cfif>
-					<div align="left" width="40%">
+					<div align="left" style="width:40%">
 						<input type="radio" id="lineup" name="type" value="lineup" required="true">Submit / Edit Weekly Lineup - BETA<br/>
 						<input type="radio" id="scores" name="type" value="scores">Submit / Edit Weekly Match Scores - ALPHA<br/>
 						<cfif url.access EQ trim(hash('ADMIN'))>
@@ -967,7 +967,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 						</cfif>
 					</div>
 				</div>
-				<div align="center">
+				<div align="center" style="float:bottom">
 					<input type="submit" name="submit" id="submit" value="SUBMIT">
 				</div>
 			</div>
