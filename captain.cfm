@@ -904,9 +904,9 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 		------------------------->
 		<cfdefaultcase>
 			<cfform name="frmTemplate" method="POST" action="http://www.duttles.com/captain.cfm?access=#accessLevel#">
-			<div align="center">
+			<div align="center" style="width:30%;">
 				<h1>Create Template For Lineup Submission</h1>
-				<div id="weekSelectDiv" align="center">
+				<div id="weekSelectDiv" align="center" style="float:left">
 					
 					<div>Select Week</div>
 					<div>
@@ -928,10 +928,13 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 					</div>
 				</div>
 				<cfif url.access EQ trim(hash('ADMIN'))>
-					<div id="teamSelectDiv" align="center">
+					<div id="teamSelectDiv" align="center" style="float:left">
 						<div>Select Team</div>
 						<div>
 							<select name="team" id="team" align="center">
+							<cfloop from="2" to="#arrayLen(teamList.values)#" index="i">
+								<option value="#teamList.values[i][1]#">#teamList.values[i][1]#</option>
+								<!---
 								<option value="All-Inspiration">All-Inspiration</option>
 								<option value="Born Gosu">Born Gosu</option>
 								<option value="The Confederation">The Confederation</option>
@@ -944,12 +947,14 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 								<option value="Taste the Bacon">Taste the Bacon</option>
 								<option value="Team UnRivaled">Team UnRivaled</option>
 								<option value="Validity Gaming">Validity Gaming</option>
+								--->
+							</cfloop>
 							</select>
 						</div>
 					<cfelse>
 						<input type="hidden" name="team" id="team" value="#url.teamAccess#">
 					</cfif>
-					<div>
+					<div align="left" width="40%">
 						<input type="radio" id="lineup" name="type" value="lineup" required="true">Submit / Edit Weekly Lineup - BETA<br/>
 						<input type="radio" id="scores" name="type" value="scores">Submit / Edit Weekly Match Scores - ALPHA<br/>
 						<cfif url.access EQ trim(hash('ADMIN'))>
