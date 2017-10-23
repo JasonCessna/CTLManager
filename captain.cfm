@@ -770,7 +770,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 									<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
 										<div id="TL#i#">&nbsp;</div>
 									</cfloop>
-								
+									<br/>{{Box|end}}
 								</td>
 								<td align="center" style="border-style:solid;width:600px;">
 									<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
