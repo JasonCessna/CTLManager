@@ -269,8 +269,8 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	<cfreturn cfhttp.filecontent>
 </cffunction>
  
-<cffunction name="setLocked">
 <cfoutput>
+<cffunction name="setLocked">
 	<cfargument name="accesstoken">
 	<cfargument name="lockValue">
 	<cfset postBody = '{
@@ -285,8 +285,8 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	</cfhttp>
 	<cfset response = cfhttp>
 	<cfreturn cfhttp.filecontent>
-</cfoutput>
  </cffunction>
+</cfoutput>
  <cffunction name="getRefreshToken"> 
 	<cfargument name="refresh" required="false" default="" type="string"> 
 	<cfset var postBody = "client_id=" & UrlEncodedFormat(application.clientid) & "&"> 
