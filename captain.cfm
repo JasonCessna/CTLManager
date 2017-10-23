@@ -952,8 +952,8 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 					<tr>
 						<td colspan="2" align="center">
 							<br/>
-							<div align="center">
-								<div align="left" style="width:80%">
+							<div align="center" style="width:80%">
+								<div align="left">
 									<input type="radio" id="lineup" name="type" value="lineup" required="true">Submit / Edit Weekly Lineup - BETA<br/>
 									<input type="radio" id="scores" name="type" value="scores">Submit / Edit Weekly Match Scores - ALPHA<br/>
 									<cfif url.access EQ trim(hash('ADMIN'))>
