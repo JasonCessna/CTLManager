@@ -13,6 +13,13 @@ BEGIN HEADER
 <cfif isDefined('form.type')>
 	<cfif left(form.type,7) EQ "display">
 		<cfset url.displayType = listgetat(form.type, 2, ",")>
+		<cfelseif form.type eq "lock">
+			<cfset push = setLocked(session.token.access_token,'yes')>
+			<center>Lineups have been locked.</center>
+		<cfelseif form.type eq "unlock">
+			<cfset push = setLocked(session.token.access_token,'no')>
+			<center>Lineups have been unlocked.</center>
+		</cfcase>
 	</cfif>
 </cfif>
 <cfparam name="url.access" default="none">
@@ -267,12 +274,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 	-------
 	 ----->
 	<cfswitch expression="#left(url.section,7)#">
-		<cfcase value="lock">
-			<cfset push = setLocked(session.token.access_token,'yes')>
-		</cfcase>
-		<cfcase value="unlock">
-			<cfset push = setLocked(session.token.access_token,'no')>
-		</cfcase>
+		
 	 <!------------------------
 		--------------------------
 				LINEUPS
