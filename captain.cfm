@@ -759,9 +759,28 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 				
 				</cfcase>
 				<cfcase value="fullLineup">
+					<table width="100%">
+							<tr>
+								<th><h1>Team Liquid Code For Lineups</h1></h1>
+								<th><h1>CTL Website Code For Lineups:</h1></h1>
+							</tr>
+							<tr valign="top">
+								<td align="center" style="border-style:solid; width:600px;">
+									==={{HiddenSort|Week#form.week#}}===<br/>
+									<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
+										<div id="TL#i#">&nbsp;</div>
+									</cfloop>
+								
+								</td>
+								<td align="center" style="border-style:solid;width:600px;">
+									<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
+										<div id="wiki#i#">&nbsp;</div>
+									</cfloop>
+								</td>
+							</tr>
+						</table>
 						<cfset listTeams = "">
 						<cfloop from="2" to="#ArrayLen(teamList.values)#" index="x">
-						#listteams#<br/>
 							<cfif !listFind(listTeams,teamList.values[x][1])>
 								<cfset teamID = teamList.values[x][2]>
 								<cfset teamLocation = ((x - 2) * 7) + 2>
@@ -871,26 +890,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 								</cfif>
 							</cfif>
 						</cfloop>
-						<table width="100%">
-							<tr>
-								<th><h1>Team Liquid Code For Lineups</h1></h1>
-								<th><h1>CTL Website Code For Lineups:</h1></h1>
-							</tr>
-							<tr valign="top">
-								<td align="center" style="broder-style:solid; width:600px;">
-									==={{HiddenSort|Week#form.week#}}===<br/>
-									<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
-										<div id="TL#i#">&nbsp;</div>
-									</cfloop>
-								
-								</td>
-								<td align="center" style="border-style:solid;width:600px;">
-									<cfloop from="1" to="#ArrayLen(teamList.values)#" index="i">
-										<div id="wiki#i#">&nbsp;</div>
-									</cfloop>
-								</td>
-							</tr>
-						</table>
+					
 				</cfcase>
 				<cfdefaultcase>
 				</cfdefaultcase>
