@@ -471,7 +471,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 				<cfif listgetat(form.type, 2, ",") NEQ "status">
 					<cfif isDefined('form.lineupSubmit')>
 						<cfset push = pushTeamRoster(session.token.access_token,form.submitLineupRage,form.player1,form.player2,form.player3,form.player4,form.player5,form.player6,form.player7)>
-						<cfset push2 = pushTeamSubmitted(session.token.access_token,"C#teamMatchupLocation#">
+						<cfset push2 = pushTeamSubmitted(session.token.access_token,"C#teamMatchupLocation#)">
 					</cfif>
 					<cfif isDefined('form.scoresSubmit')>
 						<cfset masterScores ="">
@@ -481,7 +481,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 						</cfloop>
 						<cfset listdeleteat(masterScores, 1, ",")>
 						<cfset push = pushTeamRoster(session.token.access_token,form.submitScoreRange,form.score1,form.score2,form.score3,form.score4,form.score5,form.score6,masterScores)>
-						<cfset push2 = pushTeamSubmitted(session.token.access_token,"D#teamMatchupLocation#">
+						<cfset push2 = pushTeamSubmitted(session.token.access_token,"D#teamMatchupLocation#)">
 					</cfif>
 					<cfset oppTeam = getWeekMatchup(session.token.access_token,getMatchupRange)>
 					
@@ -490,13 +490,14 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 							<cfset team2ID = teamList.values[i][2]>
 							<cfset team2Location = ((i - 2) * 7) + 2>
 							<cfset team2MatchupLocation = i>
+							<cfset team2Name = teamList.values[i][1]>
 						</cfif>
 					</cfloop>	
 					<cfset getScoreRange2 	= alpha["lineup#form.week#"]  & toString(team2Location) & ":" & alpha["score#form.week#"] & toString((team2Location + 6))>
 					<cfset weekResults1 	= getWeeklyLineup(session.token.access_token,getScoreRange)>
 					<cfset weekResults2 	= getWeeklyLineup(session.token.access_token,getScoreRange2)>
-					<cfdump var="#weekResults2#">
 				</cfif>
+				Lineups submitted succesfully.
 			</cfif>
 			
 			<cfswitch expression="#url.displayType#">
@@ -597,7 +598,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 							</script>
 						</cfif>
 					<cfelse>
-						<div align="center">#team2ID# Has not yet submitted their lineup. Full matchup can be viewed after.</div>
+						<div align="center">#team2Name# Has not yet submitted their lineup. Full matchup can be viewed after.</div>
 					</cfif>
 				</cfcase>
 				
@@ -796,7 +797,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 								<option value="The Confederation">The Confederation</option>
 								<option value="Daily Life">Daily Life</option>
 								<option value="Formless Bearsloths">Formless Bearsloths</option>
-								<option value="Guns & Roaches">Guns & Roaches</option>
+								<option value="Guns And Roaches">Guns And Roaches</option>
 								<option value="Insight Gaming">Insight Gaming</option>
 								<option value="LiT Esports">LiT Esports</option>
 								<option value="Psionic Aftermath">Psionic Aftermath</option>
