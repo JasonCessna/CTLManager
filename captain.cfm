@@ -9,6 +9,9 @@
 BEGIN HEADER
 -------
  ----->
+ 
+ <!--- include functions --->
+<cfinclude template="fn_master.cfm">
 <cfparam name="url.displayType" default="">
 <cfif isDefined('form.type')>
 	<cfif left(form.type,7) EQ "display">
@@ -24,12 +27,8 @@ BEGIN HEADER
 <cfparam name="url.access" default="none">
 <cfset accessLevel=url.access>
  
- <!--- include functions --->
-<cfinclude template="fn_master.cfm">
 <cfif url.access NEQ hash("ADMIN") AND url.access NEQ hash("CAPTAIN")>
-
-You do not have the proper permissions to view this site. Please contact a CTL admin for assistance.
-
+You do not have the proper permissions to view this site. Please contact a CTL Admin for assistance.
 <cfelse>
 
 	<!--- define structure for alpha positions in the MASTER SHEET's weekly lineup sheet --->

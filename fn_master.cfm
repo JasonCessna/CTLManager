@@ -273,10 +273,10 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	<cfargument name="accesstoken">
 	<cfargument name="lockValue">
 	<cfset postBody = '{
-                  "range": "Master!C2:C13",
+                  "range": "Master!C2",
 		  "majorDimension": "COLUMNS",
                   "values": [	["#arguments.lockValue#","#arguments.lockValue#","#arguments.lockValue#","#arguments.lockValue#","#arguments.lockValue#","#arguments.lockValue#","#arguments.lockValue#","#arguments.lockValue#","#arguments.lockValue#","#arguments.lockValue#","#arguments.lockValue#","#arguments.lockValue#"]]}'>
-	<cfhttp method="put" url="https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values/Master!C2:C13">
+	<cfhttp method="put" url="https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values/Master!C2">
 		<cfhttpparam type="header" name="Authorization" value="OAuth #arguments.accesstoken#"><cfhttpparam name="Content-Type" type="header" value="application/json"> 
 		<cfhttpparam type="header" name="GData-Version" value="3">
 		<cfhttpparam type="URL" name="valueInputOption" value="USER_ENTERED">
@@ -285,6 +285,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	<cfset response = cfhttp>
 	<cfreturn cfhttp.filecontent>
  </cffunction>
+ 
  <cffunction name="getRefreshToken"> 
 	<cfargument name="refresh" required="false" default="" type="string"> 
 	<cfset var postBody = "client_id=" & UrlEncodedFormat(application.clientid) & "&"> 
