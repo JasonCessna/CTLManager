@@ -471,7 +471,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 				<cfif listgetat(form.type, 2, ",") NEQ "status">
 					<cfif isDefined('form.lineupSubmit')>
 						<cfset push = pushTeamRoster(session.token.access_token,form.submitLineupRage,form.player1,form.player2,form.player3,form.player4,form.player5,form.player6,form.player7)>
-						<cfset push2 = pushTeamSubmitted(session.token.access_token,"C#teamMatchupLocation#)">
+						<cfset push2 = pushTeamSubmitted(session.token.access_token,"C#teamMatchupLocation#")>
 					</cfif>
 					<cfif isDefined('form.scoresSubmit')>
 						<cfset masterScores ="">
@@ -481,7 +481,7 @@ You do not have the proper permissions to view this site. Please contact a CTL a
 						</cfloop>
 						<cfset listdeleteat(masterScores, 1, ",")>
 						<cfset push = pushTeamRoster(session.token.access_token,form.submitScoreRange,form.score1,form.score2,form.score3,form.score4,form.score5,form.score6,masterScores)>
-						<cfset push2 = pushTeamSubmitted(session.token.access_token,"D#teamMatchupLocation#)">
+						<cfset push2 = pushTeamSubmitted(session.token.access_token,"D#teamMatchupLocation#")>
 					</cfif>
 					<cfset oppTeam = getWeekMatchup(session.token.access_token,getMatchupRange)>
 					
