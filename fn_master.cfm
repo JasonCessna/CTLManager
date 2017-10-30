@@ -268,6 +268,28 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	<cfset response = cfhttp>
 	<cfreturn cfhttp.filecontent>
 </cffunction>
+
+<cffunction name="pushNewPlayer">
+	<cfargument name="accesstoken">
+	<cfargument name="teamID">
+	<cfargument name="name">
+	<cfargument name="bnet">
+	<cfargument name="profile">
+	<cfargument name="race">
+	<cfargument name="league">
+	<cfset postBody = '{
+                  "range": "A",
+		  "majorDimension": "ROWS",
+                  "values": [	["#arguments.name#","#arguments.bnet#","#arguments.profile#","#arguments.rank#","#arguments.league#"]]}'>
+	<cfhttp method="POST" url="https://sheets.googleapis.com/v4/spreadsheets/#teamID#/values/A:append">
+		<cfhttpparam type="header" name="Authorization" value="OAuth #arguments.accesstoken#"><cfhttpparam name="Content-Type" type="header" value="application/json"> 
+		<cfhttpparam type="header" name="GData-Version" value="3">
+		<cfhttpparam type="URL" name="valueInputOption" value="USER_ENTERED">
+		<cfhttpparam type="body" value="#postBody#">
+	</cfhttp>
+	<cfset response = cfhttp>
+	<cfreturn cfhttp.filecontent>
+ </cffunction>
  
 <cffunction name="setLocked">
 	<cfargument name="accesstoken">

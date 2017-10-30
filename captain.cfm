@@ -322,7 +322,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 										#structPlayer['name' & i]#</option>
 									</cfif>
 								</cfif>
-								<option value="Forfeit" select="selected">Forfeit</option>
+								<option value="Forfeit|null|null|null|null|null" select="selected">Forfeit</option>
 									<cfloop to="2" from="#ArrayLen(roster.values)#" index="x" step="-1">
 										<cfif StructKeyExists(structRanks,roster.values[x][4])>
 											<cfif structRanks["#roster.values[x][4]#"] LTE aryMapSlot[i][3]>
@@ -405,7 +405,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 												</cfif>
 											</td>
 											<td align="center">
-											<!----
+											<!---
 												<cfif i GTE 7>
 													<cfif listlen(structPlayer["score" & ListGetAt(weekLineup.values[7][1], 2, '|')], ",") GT 0>
 														<input type="number" name="score#i#" id="score#i#" value="#right(ListGetAt(structPlayer['score' & ListGetAt(weekLineup.values[7][1], 2, '|')], (i % 7) + 1, ','),1)#">
@@ -415,7 +415,8 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 												<cfelse>
 													<input type="number" name="score#i#" id="score#i#" value="#structPlayer["score" & ListGetAt(weekLineup.values[i][1], 2, '|')]#">
 												</cfif>
-											---><select name="score#i#" id="score#i#">
+											--->
+												<select name="score#i#" id="score#i#">
 													<cfif i GTE 7>
 														<cfif listlen(structPlayer["score" & ListGetAt(weekLineup.values[7][1], 2, '|')], ",") GT 0>
 															<option value="#right(ListGetAt(structPlayer['score' & ListGetAt(weekLineup.values[7][1], 2, '|')], (i % 7) + 1, ','),1)#" selected="selected">#right(ListGetAt(structPlayer['score' & ListGetAt(weekLineup.values[7][1], 2, '|')], (i % 7) + 1, ','),1)#</option>
@@ -429,6 +430,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 													</cfif>
 													<option value="Win">Win</option>
 													<option value="Loss">Loss</option>
+													<option value="Request Walkover">Request Walkover (Win)</option>
 												</select>
 											</td>
 											<td align="center">
@@ -841,7 +843,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 									</div>
 										<script>
 											var TLpad;
-											TLpad="{{Box|break|padding=2em}} <br />";
+											TLpad="{{Box|<cfif i GT 1>break</cfif>|padding=2em}} <br />";
 											TLpad+="{{TeamMatch <br />";
 											TLpad+="|width=300 <br />";
 											TLpad+="|team1=#team1Name# <br />";
@@ -876,7 +878,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 											</cfloop>
 											
 											var wikiPad;
-											wikiPad='&lt;h1&gt;&lt;img src="#structIMG[oppTeam.values[1][1]]#" /&gt; &lt;span style="color: ###structCOLOR[oppTeam.values[1][1]]#;"&gt;#oppTeam.values[1][1]#&lt;/span&gt; vs &lt;span style="color: ###structCOLOR[form.team]#;"&gt;#form.team#&lt;/span&gt;&lt;img src="#structIMG[form.team]#" /&gt;&lt;/h1&gt; <br />';
+											wikiPad='&lt;h1&gt;&lt;img src="#structIMG[oppTeam.values[1][1]]#" style="max-width:44px; max-height:44px;" /&gt; &lt;span style="color: ###structCOLOR[oppTeam.values[1][1]]#;"&gt;#oppTeam.values[1][1]#&lt;/span&gt; vs &lt;span style="color: ###structCOLOR[team1Name]#;"&gt;#team1Name#&lt;/span&gt;&lt;img src="#structIMG[team1Name]#" style="max-width:44px; max-height:44px;" /&gt;&lt;/h1&gt; <br />';
 											<cfloop from="1" to="7" index="i">
 												wikiPad+='&lt;img src="<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">#structIMG["random"]#<cfelse>#structIMG[ListGetAt(weekResults2.values[i][1],5,"|")]#</cfif>" /&gt; &lt;a href="#ListGetAt(weekResults2.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults2.values[i][1],1,"|")# | #ListGetAt(weekResults2.values[i][1],2,"|")#&lt;/a&gt; vs. &lt;a href="#ListGetAt(weekResults1.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults1.values[i][1],1,"|")# | #ListGetAt(weekResults1.values[i][1],2,"|")#&lt;/a&gt; &lt;img src="<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">#structIMG["Random"]#<cfelse>#structIMG[ListGetAt(weekResults1.values[i][1],5,"|")]#</cfif>" /&gt; &lt;i&gt;[#aryMapSlot[i][2]#&lt;/i&gt;&lt;br /&gt <br />';
 											</cfloop>
@@ -896,6 +898,56 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 				</cfdefaultcase>
 			</cfswitch>
 			
+		</cfcase>
+		
+		<cfcase value="newPlayer">
+		
+			<cfform name="frmNewPlayer" method="POST" action="http://www.duttles.com/captain.cfm?access=#accessLevel#">
+			<div align="center">
+				<h1>Adding Player to #form.team#</h1>
+				<table width="70%">
+					<tr>
+						<td>Player Name:</td>
+						<td><input name="name" style="width:150" required="true" /></td>
+					</tr>
+					<tr>
+						<td>BattleNet ID:</td>
+						<td><input name="bnet" style="width:150"  required="true"/></td>
+					</tr>
+					<tr>
+						<td>Enjin Profile Link:</td>
+						<td><input name="profile" style="width:400"  required="true"/></td>
+					</tr>
+					<tr>
+						<td>Race:</td>
+						<td>
+							<select name="race"  required="true"">
+								<option value="Protoss">Protoss</option>
+								<option value="Terran">Terran</option>
+								<option value="Zerg">Zerg</option>
+								<option value="Random">Random</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>League:</td>
+						<td>
+							<select name="league">
+								<option value="Bronze">Bronze</option>
+								<option value="Silver">Silver</option>
+								<option value="Gold">Gold</option>
+								<option value="Platinum">Platinum</option>
+								<option value="Diamond">Diamond</option>
+								<option value="Masters">Masters</option>
+								<option value="GrandMaster">GrandMaster</option>
+								<option value="Inactive">Inactive (or ineligible)</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+				<input type="hidden" name="team" value="#form.name#">
+				<input type="submit" id="SUBMIT" name="SUBMIT" value="SUBMIT" style="width:150" />
+			</cfform>
 		</cfcase>
 		<!------------------------
 		--------------------------
@@ -952,7 +1004,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 					<tr>
 						<td colspan="2" align="center">
 							<br/>
-							<div align="center" style="width:80%">
+							<div align="center" style="width:70%">
 								<div align="left">
 									<input type="radio" id="lineup" name="type" value="lineup" required="true">Submit / Edit Weekly Lineup - BETA<br/>
 									<input type="radio" id="scores" name="type" value="scores">Submit / Edit Weekly Match Scores - ALPHA<br/>
@@ -965,6 +1017,8 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 										------------------------------------------------<br/>
 										<input type="radio" id="lock" 				name="type" value="lock"><label for="lock">Lock Lineups</label><br/>
 										<input type="radio" id="unlock" 			name="type" value="unlock"><label for="unlock">Unlock Lineups</label>
+										-------------------------------------------------<br/>
+										<input type="radio" id="newPlayer"			name="type" value="newPlayer"><label for="newPlayer">Add Player (accepted application)</label>
 									</cfif>
 								</div>
 							</div>
@@ -973,10 +1027,29 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 				</table>
 						
 				<div align="center">
-					<input type="submit" name="submit" id="submit" value="SUBMIT">
+					<input type="submit" name="submit" id="submit" value="SUBMIT" style="width:150;padding:5">
 				</div>
 			</div>
 			</cfform>
+			<cfif isDefined('frmNewPlayer.SUBMIT')>
+				<cfset push = pushNewPlayer(session.token.access_token,teamID,form.name,form.bnet,form.profile,form.race,form.league)>
+				<cfdump var="#push#">
+				<br/>
+				<br/>
+				<br/>
+				<div align="center">
+					#form.name# added to #form.team#. <br/>
+					Code for Enjin: <br/>
+					<div id="enjin" style="border-style:solid; width:600px;">
+					
+					</div>
+				<!---http://i.imgur.com/lY0rg.png [http://www.choboteamleague.com/profile/18919052 EDEdDNEdDYFaN | FeiFongWong#1213] <br />--->
+				</div>
+				<script>
+					var pad = '#structIMG[form.race]# [#form.profile# | #form.name# | #form.bnet# ] &lt;br /&gt';
+					document.getElementById("enjin").innerHTML = pad;
+				</script>
+			</cfif>
 		</cfdefaultcase>
 	</cfswitch>
 </cfif>
