@@ -945,7 +945,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 						</td>
 					</tr>
 				</table>
-				<input type="hidden" name="team" value="#form.name#">
+				<input type="hidden" name="team" value="#form.team#">
 				<input type="submit" id="SUBMIT" name="SUBMIT" value="SUBMIT" style="width:150" />
 			</cfform>
 		</cfcase>
