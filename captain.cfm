@@ -1034,7 +1034,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 			</cfform>
 			<cfif isDefined('form.addPlayer')>
 				<cfset push = pushNewPlayer(session.token.access_token,teamID,form.name,form.bnet,form.profile,form.race,form.league)>
-				<cfdump var="#push#">
+				#push#
 				<br/>
 				<br/>
 				<br/>

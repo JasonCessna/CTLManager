@@ -285,6 +285,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 		<cfhttpparam type="header" name="Authorization" value="OAuth #arguments.accesstoken#"><cfhttpparam name="Content-Type" type="header" value="application/json"> 
 		<cfhttpparam type="header" name="GData-Version" value="3">
 		<cfhttpparam type="URL" name="valueInputOption" value="USER_ENTERED">
+		<cfhttpparam type="URL" name="insertDataOption" value="INSERT_ROWS">
 		<cfhttpparam type="body" value="#postBody#">
 	</cfhttp>
 	<cfset response = cfhttp>
