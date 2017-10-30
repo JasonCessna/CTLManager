@@ -280,7 +280,7 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	<cfset postBody = '{
                   "range": "A",
 		  "majorDimension": "ROWS",
-                  "values": [	["#arguments.name#","#arguments.bnet#","#arguments.profile#","#arguments.rank#","#arguments.league#"]]}'>
+                  "values": [	["#arguments.name#","#arguments.bnet#","#arguments.profile#","#arguments.league#","#arguments.race#"]]}'>
 	<cfhttp method="POST" url="https://sheets.googleapis.com/v4/spreadsheets/#teamID#/values/A:append">
 		<cfhttpparam type="header" name="Authorization" value="OAuth #arguments.accesstoken#"><cfhttpparam name="Content-Type" type="header" value="application/json"> 
 		<cfhttpparam type="header" name="GData-Version" value="3">
