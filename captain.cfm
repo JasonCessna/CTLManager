@@ -946,7 +946,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 					</tr>
 				</table>
 				<input type="hidden" name="team" value="#form.team#">
-				<input type="submit" id="SUBMIT" name="SUBMIT" value="SUBMIT" style="width:150" />
+				<input type="submit" id="addPlayer" name="addPlayer" value="SUBMIT" style="width:150" />
 			</cfform>
 		</cfcase>
 		<!------------------------
@@ -1031,7 +1031,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 				</div>
 			</div>
 			</cfform>
-			<cfif isDefined('frmNewPlayer.SUBMIT')>
+			<cfif isDefined('frmNewPlayer.addPlayer')>
 				<cfset push = pushNewPlayer(session.token.access_token,teamID,form.name,form.bnet,form.profile,form.race,form.league)>
 				<cfdump var="#push#">
 				<br/>
