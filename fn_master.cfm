@@ -278,14 +278,14 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 	<cfargument name="race">
 	<cfargument name="league">
 	<cfset postBody = '{
-                  "range": "Sheet1!A1",
+                  "range": "Sheet1!A",
 				  "majorDimension": "ROWS",
                   "values": [	["#arguments.name#","#arguments.bnet#","#arguments.profile#","#arguments.league#","#arguments.race#"]]}'>
-	<cfhttp method="put" url="https://sheets.googleapis.com/v4/spreadsheets/#teamID#/values/Sheet1!A1:append">
+	<cfhttp method="put" url="https://sheets.googleapis.com/v4/spreadsheets/#teamID#/values/Sheet1:A:append">
 		<cfhttpparam type="header" name="Authorization" value="OAuth #arguments.accesstoken#"><cfhttpparam name="Content-Type" type="header" value="application/json"> 
 		<cfhttpparam type="header" name="GData-Version" value="3">
-		<cfhttpparam type="URL" name="valueInputOption" value="USER_ENTERED">
-		<cfhttpparam type="URL" name="insertDataOption" value="INSERT_ROWS">
+		<cfhttpparam type="header" name="valueInputOption" value="USER_ENTERED">
+		<cfhttpparam type="header" name="insertDataOption" value="INSERT_ROWS">
 		<cfhttpparam type="body" value="#postBody#">
 	</cfhttp>
 	<cfset response = cfhttp>
