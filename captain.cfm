@@ -900,7 +900,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 			
 		</cfcase>
 		
-		<cfcase value="newPlayer">
+		<cfcase value="newApp">
 		
 			<cfform name="frmNewPlayer" method="POST" action="http://www.duttles.com/captain.cfm?access=#accessLevel#">
 			<div align="center">
@@ -1016,9 +1016,9 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 										<input type="radio" id="display,status" 	name="type" value="display,status"><label for="display,status">View Team Submission Status ) - ALPHA</label><br/>
 										------------------------------------------------<br/>
 										<input type="radio" id="lock" 				name="type" value="lock"><label for="lock">Lock Lineups</label><br/>
-										<input type="radio" id="unlock" 			name="type" value="unlock"><label for="unlock">Unlock Lineups</label>
+										<input type="radio" id="unlock" 			name="type" value="unlock"><label for="unlock">Unlock Lineups</label><br/>
 										-------------------------------------------------<br/>
-										<input type="radio" id="newPlayer"			name="type" value="newPlayer"><label for="newPlayer">Add Player (accepted application)</label>
+										<input type="radio" id="newApp"			name="type" value="newApp"><label for="newApp">Add Player (accepted application)</label>
 									</cfif>
 								</div>
 							</div>
