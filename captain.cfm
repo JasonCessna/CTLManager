@@ -27,9 +27,11 @@ BEGIN HEADER
 <cfparam name="url.access" default="none">
 <cfset accessLevel=url.access>
  
+ 
 <cfif url.access NEQ hash("ADMIN") AND url.access NEQ hash("CAPTAIN")>
 You do not have the proper permissions to view this site. Please contact a CTL Admin for assistance.
 <cfelse>
+
 
 	<!--- define structure for alpha positions in the MASTER SHEET's weekly lineup sheet --->
 	<cfset alpha = structNew()>
@@ -212,6 +214,10 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 					<cfset teamMatchupLocation = i>
 			</cfif>
 		</cfloop>
+		
+		<a href="https://docs.google.com/spreadsheets/d/#teamid#/edit?usp=sharing">Click here to access your roster.</a><br/>
+		Note: If you update your roster, please don't REFRESH this page. Press back and re-submit to return or else you will get an error.<br/>
+	
 		<!--- set range for 'get' and 'submit' from the MASTER SHEET's weekly lineups --->
 		<cfset getLineupRange 	= alpha["lineup#form.week#"]  & toString(teamLocation) & ":" & alpha["lineup#form.week#"] & toString((teamLocation + 6))>
 		<cfset submitLineupRage = alpha["lineup#form.week#"]  & toString(teamLocation)>
