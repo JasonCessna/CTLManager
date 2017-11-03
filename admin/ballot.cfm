@@ -1,5 +1,17 @@
 <div align="center">
-<h1>Ballot Results for the Season 17 Admin Elections (November 2, 2017)</h1>
+	<h1>Ballot Results for the Season 17 Admin Elections (November 2, 2017)</h1>
+
+	<button name="btnOne" id="btnOne" onclick="firstClick();">Show First Round Results</button>
+	<button name="1" id="1" onclick="firstClick1();">Hide First Round Results</button>
+	<button name="btnTwo" id="btnTwo" onclick="secondClick();">Show Second Round Results</button>
+	<button name="2" id="2" onclick="secondClick2();">Hide Second Round Results</button>
+	<button name="btnThree" id="btnThree" onclick="thirdClick();">Show Third Round Results</button>
+	<button name="3" id="3" onclick="thirdClick3();">Hide Third Round Results</button>
+	<button name="btnFour" id="btnFour" onclick="fourthClick();">Show Final Round Results</button>
+	<button name="4" id="4" onclick="fourthClick4();">Hide Final Round Results</button>
+	<button name="btnFive" id="btnFive" onclick="fifthClick();">Show Actual Votes</button>
+	<button name="5" id="5" onclick="fifthClick5();">Hide Actual Votes</button>
+
 	<cfset testFile			= "ballot2.csv" >
 	<cfhttp method="get" url="http://ctl.ballot/csv/#testFile#" name="csvData"  
 			columns= "Timestamp,Email,Handle,FirstVote,SecondVote,ThirdVote,FourthVote"> 
@@ -11,7 +23,7 @@
 	<cfquery name="qryVotes" dbtype="query">
 		SELECT 	Handle,Email,FirstVote,SecondVote,ThirdVote,FourthVote
 		FROM	csvData
-		order by handle,email,FirstVote,SecondVote,ThirdVote,FourthVote
+		order by FirstVote,Handle,SecondVote,ThirdVote,FourthVote
 	</cfquery>
 	<cfquery name="qryHandles" dbtype="query">
 		select handle from qryVotes
@@ -257,36 +269,92 @@
 		<h1>CONGRATULATIONS TO THE WINNER OF THE ELECTION AND NEW ADMIN #winner# !!!</h1>
 		<h2>We are happy to apologize for the next six months of your life.</h2>
 	</div>
-<button name="btnOne" id="btnOne" onclick="firstClick();">Show First Round Results</button>
-<button name="btnTwo" id="btnTwo" onclick="secondClick();">Show Second Round Results</button>
-<button name="btnThree" id="btnThree" onclick="thirdClick();">Show Third Round Results</button>
-<button name="btnFour" id="btnFour" onclick="fourthClick();">Show Final Round Results</button>
+	<div id="votes">
+	<h2>Raw Voting Data (voter names and emails are to remain anonymous)</h2>
+		<table cellpadding="10" style="border:1px solid black">
+			<tr style="background:##c5f0f9">
+				<th>Vote Number</th>
+				<th>First Vote</th>
+				<th>Second Vote</th>
+				<th>Third Vote</th>
+				<th>Fourth Vote</th>
+			</tr>
+			<cfloop query="qryVotes">
+				<tr style="background:<cfif qryVotes.currentRow % 2 EQ 0>##a4c1a5<cfelse>##a7a4c1</cfif>">
+					<td>#qryVotes.currentRow#</td>
+					<td>#qryVotes.FirstVote#</td>
+					<td>#qryVotes.SecondVote#</td>
+					<td>#qryVotes.ThirdVote#</td>
+					<td>#qryVotes.FourthVote#</td>
+				</tr>
+			</cfloop>
+		</table>
+	</div>
 </div>
-
 <script>
 	window.onload = function() {
 		document.getElementById("first").style.display = 'none';
 		document.getElementById("second").style.display = 'none';
 		document.getElementById("third").style.display = 'none';
 		document.getElementById("fourth").style.display = 'none';
+		document.getElementById("votes").style.display = 'none';
+		document.getElementById("1").style.display = 'none';
+		document.getElementById("2").style.display = 'none';
+		document.getElementById("3").style.display = 'none';
+		document.getElementById("4").style.display = 'none';
+		document.getElementById("5").style.display = 'none';
 	}
 	firstClick = function() {
 		document.getElementById("first").style.display = 'initial';
+		document.getElementById("1").style.display = 'initial';
 		document.getElementById("btnOne").style.display = 'none';
 	}
 	secondClick = function() {
 		document.getElementById("second").style.display = 'initial';
+		document.getElementById("2").style.display = 'initial';
 		document.getElementById("btnTwo").style.display = 'none';
 	}
 	thirdClick = function() {
 		document.getElementById("third").style.display = 'initial';
+		document.getElementById("3").style.display = 'initial';
 		document.getElementById("btnThree").style.display = 'none';
 	}
 	fourthClick = function() {
 		document.getElementById("fourth").style.display = 'initial';
+		document.getElementById("4").style.display = 'initial';
 		document.getElementById("btnFour").style.display = 'none';
 	}
+	fifthClick = function() {
+		document.getElementById("votes").style.display = 'initial';
+		document.getElementById("5").style.display = 'initial';
+		document.getElementById("btnFive").style.display = 'none';
+	}
 
+	firstClick1 = function() {
+		document.getElementById("first").style.display = 'none';
+		document.getElementById("1").style.display = 'none';
+		document.getElementById("btnOne").style.display = 'initial';
+	}
+	secondClick2 = function() {
+		document.getElementById("second").style.display = 'none';
+		document.getElementById("2").style.display = 'none';
+		document.getElementById("btnTwo").style.display = 'initial';
+	}
+	thirdClick3 = function() {
+		document.getElementById("third").style.display = 'none';
+		document.getElementById("3").style.display = 'none';
+		document.getElementById("btnThree").style.display = 'initial';
+	}
+	fourthClick4 = function() {
+		document.getElementById("fourth").style.display = 'none';
+		document.getElementById("4").style.display = 'none';
+		document.getElementById("btnFour").style.display = 'initial';
+	}
+	fifthClick5 = function() {
+		document.getElementById("votes").style.display = 'none';
+		document.getElementById("5").style.display = 'none';
+		document.getElementById("btnFive").style.display = 'initial';
+	}
 </script>
 
 </cfoutput>
