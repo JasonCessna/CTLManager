@@ -173,6 +173,17 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
 		var result = h.send().getPrefix();
 		return deserializeJSON(result.filecontent.toString());
 	}
+	public function getAdminMapPool(accesstoken) {
+		
+		var h = new http();
+		h.setURL("https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values/MapRotation!A2:A8");
+		h.setMethod("get");
+		h.addParam(type="header",name="Authorization",value="OAuth #accesstoken#");
+		h.addParam(type="header",name="GData-Version",value="3");
+		h.setResolveURL(true);
+		var result = h.send().getPrefix();
+		return deserializeJSON(result.filecontent.toString());
+	}
 	public function getIsLocked(accesstoken,range) {
 	
 		var h = new http();
@@ -259,6 +270,29 @@ VG:				1_QNnn7pHldHOo3Ul2Z5tBAkjXchKQY7JNuUQpmITihc
                   "range": "Master!#arguments.range#",
 		  "majorDimension": "COLUMNS",
                   "values": [	["yes"]]}'>
+	<cfhttp method="put" url="https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values/Master!#arguments.range#">
+		<cfhttpparam type="header" name="Authorization" value="OAuth #arguments.accesstoken#"><cfhttpparam name="Content-Type" type="header" value="application/json"> 
+		<cfhttpparam type="header" name="GData-Version" value="3">
+		<cfhttpparam type="URL" name="valueInputOption" value="USER_ENTERED">
+		<cfhttpparam type="body" value="#postBody#">
+	</cfhttp>
+	<cfset response = cfhttp>
+	<cfreturn cfhttp.filecontent>
+</cffunction>
+
+<cffunction name="pushMapsSubmitted">
+	<cfargument name="accesstoken">
+	<cfargument name="m1">
+	<cfargument name="m2">
+	<cfargument name="m3">
+	<cfargument name="m4">
+	<cfargument name="m5">
+	<cfargument name="m6">
+	<cfargument name="m7">
+	<cfset postBody = '{
+                  "range": "Master!#arguments.range#",
+		  "majorDimension": "COLUMNS",
+                  "values": [	["#arguments.m1#","#arguments.m2#","#arguments.m3#","#arguments.m4#","#arguments.m5#","#arguments.m6#","#arguments.m7#",]]}'>
 	<cfhttp method="put" url="https://sheets.googleapis.com/v4/spreadsheets/1opwN2mjdPJ1pug9s9tovlFR8wexUn47RNU5504dsi24/values/Master!#arguments.range#">
 		<cfhttpparam type="header" name="Authorization" value="OAuth #arguments.accesstoken#"><cfhttpparam name="Content-Type" type="header" value="application/json"> 
 		<cfhttpparam type="header" name="GData-Version" value="3">

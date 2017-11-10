@@ -37,14 +37,13 @@
 			<cfif authList.values[i][2] EQ email>
 				<cfset accessLevel = authList.values[i][4]>
 				<cfset accessTeam = authList.values[i][3]>
-				<cfset userName = authList.values[i][1]>
 			</cfif>
 		</cfloop>
-		<!---
-		<cfset email = getUserEmail(session.token.access_token)>
-		<cfdump var="#email#">--->
 		<center>
 		<cfif accessLevel NEQ "">
+		
+			<cflocation url="http://www.duttles.com/captain.cfm?teamAccess=#accessTeam#&access=#hash(trim(accessLevel))#">
+		<!---
 			Welcome #userName# (#email#). You are currently logged in as a #accessLevel# <cfif accessLevel NEQ "ADMIN">for team #accessTeam#</cfif>.<br/>
 			<cfif accessLevel EQ "ADMIN" OR accessLevel EQ "CAPTAIN">
 				<a href="http://www.duttles.com/captain.cfm?teamAccess=#accessTeam#&access=#hash(trim(accessLevel))#">Captains</a><cfif accessLevel EQ "ADMIN"> - for lineups and score submissions</cfif><br/>
@@ -53,7 +52,7 @@
 				<a href="http://www.duttles.com/captain.cfm?access=#hash(trim(accessLevel))#">Admins</a> - for getting auto-generated code and changing season settings.
 			</cfif>
 		<cfelse>
-		
+		--->
 		</cfif>
 		</center>
 
@@ -76,12 +75,7 @@
 
 </cfswitch>
 <BODY>
-<!---<div id="captain">
-<input type="button" onclick="" 		name="lineups" 	id="lineups" 	value="TEAM LINEUPS GENERATOR">
-</div>
-<div id="admin">
-<input type="button" onclick="location.href='admin_create_season_template.cfm'" name="maps" 	id="maps"		value="SEASON MAP ORDER GENERATOR">
-</div>--->
+
 </BODY>
 
 </cfoutput>

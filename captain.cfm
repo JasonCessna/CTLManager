@@ -24,15 +24,21 @@ BEGIN HEADER
 		<center>Lineups have been unlocked.</center>
 	</cfif>
 </cfif>
+
+<cfif isDefined('form.mapsGO')>
+	<cfset push = pushMapsSubmitted(session.token.access_token,form.m1,form.m2,form.m3,form.m4,form.m5,form.m6,form.m7)>
+	<cfdump var=#push#"><br/>
+	<div align="center" style="color:blue">
+		<h5>Map Pool Successfuly Updated</h5>
+	</div>
+</cfif>
+
 <cfparam name="url.access" default="none">
 <cfset accessLevel=url.access>
- 
  
 <cfif url.access NEQ hash("ADMIN") AND url.access NEQ hash("CAPTAIN")>
 You do not have the proper permissions to view this site. Please contact a CTL Admin for assistance.
 <cfelse>
-
-
 	<!--- define structure for alpha positions in the MASTER SHEET's weekly lineup sheet --->
 	<cfset alpha = structNew()>
 	<cfset alpha["lineup1"] = "C">
@@ -604,7 +610,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 								var wikiPad;
 								wikiPad='&lt;h1&gt;&lt;img src="#structIMG[oppTeam.values[1][1]]#" /&gt; &lt;span style="color: ###structCOLOR[oppTeam.values[1][1]]#;"&gt;#oppTeam.values[1][1]#&lt;/span&gt; vs &lt;span style="color: ###structCOLOR[form.team]#;"&gt;#form.team#&lt;/span&gt;&lt;img src="#structIMG[form.team]#" /&gt;&lt;/h1&gt; <br />';
 								<cfloop from="1" to="7" index="i">
-									wikiPad+='&lt;img src="<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">#structIMG["random"]#<cfelse>#structIMG[ListGetAt(weekResults2.values[i][1],5,"|")]#</cfif>" /&gt; &lt;a href="#ListGetAt(weekResults2.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults2.values[i][1],1,"|")# | #ListGetAt(weekResults2.values[i][1],2,"|")#&lt;/a&gt; vs. &lt;a href="#ListGetAt(weekResults1.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults1.values[i][1],1,"|")# | #ListGetAt(weekResults1.values[i][1],2,"|")#&lt;/a&gt; &lt;img src="<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">#structIMG["Random"]#<cfelse>#structIMG[ListGetAt(weekResults1.values[i][1],5,"|")]#</cfif>" /&gt; &lt;i&gt;[#aryMapSlot[i][2]#&lt;/i&gt;&lt;br /&gt <br />';
+									wikiPad+='&lt;img src="<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">#structIMG["random"]#<cfelse>#structIMG[ListGetAt(weekResults2.values[i][1],5,"|")]#</cfif>" /&gt; &lt;a href="#ListGetAt(weekResults2.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults2.values[i][1],1,"|")# | #ListGetAt(weekResults2.values[i][1],2,"|")#&lt;/a&gt; vs. &lt;a href="#ListGetAt(weekResults1.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults1.values[i][1],1,"|")# | #ListGetAt(weekResults1.values[i][1],2,"|")#&lt;/a&gt; &lt;img src="<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">#structIMG["Random"]#<cfelse>#structIMG[ListGetAt(weekResults1.values[i][1],5,"|")]#</cfif>" /&gt; &lt;i&gt;[#aryMapSlot[i][2]#]&lt;/i&gt;&lt;br /&gt <br />';
 								</cfloop>
 								
 								document.getElementById("TL").innerHTML = TLpad;
@@ -886,7 +892,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 											var wikiPad;
 											wikiPad='&lt;h1&gt;&lt;img src="#structIMG[oppTeam.values[1][1]]#" style="max-width:44px; max-height:44px;" /&gt; &lt;span style="color: ###structCOLOR[oppTeam.values[1][1]]#;"&gt;#oppTeam.values[1][1]#&lt;/span&gt; vs &lt;span style="color: ###structCOLOR[team1Name]#;"&gt;#team1Name#&lt;/span&gt;&lt;img src="#structIMG[team1Name]#" style="max-width:44px; max-height:44px;" /&gt;&lt;/h1&gt; <br />';
 											<cfloop from="1" to="7" index="i">
-												wikiPad+='&lt;img src="<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">#structIMG["random"]#<cfelse>#structIMG[ListGetAt(weekResults2.values[i][1],5,"|")]#</cfif>" /&gt; &lt;a href="#ListGetAt(weekResults2.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults2.values[i][1],1,"|")# | #ListGetAt(weekResults2.values[i][1],2,"|")#&lt;/a&gt; vs. &lt;a href="#ListGetAt(weekResults1.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults1.values[i][1],1,"|")# | #ListGetAt(weekResults1.values[i][1],2,"|")#&lt;/a&gt; &lt;img src="<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">#structIMG["Random"]#<cfelse>#structIMG[ListGetAt(weekResults1.values[i][1],5,"|")]#</cfif>" /&gt; &lt;i&gt;[#aryMapSlot[i][2]#&lt;/i&gt;&lt;br /&gt <br />';
+												wikiPad+='&lt;img src="<cfif ListGetAt(weekResults2.values[i][1],1,"|") EQ "Forfeit">#structIMG["random"]#<cfelse>#structIMG[ListGetAt(weekResults2.values[i][1],5,"|")]#</cfif>" /&gt; &lt;a href="#ListGetAt(weekResults2.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults2.values[i][1],1,"|")# | #ListGetAt(weekResults2.values[i][1],2,"|")#&lt;/a&gt; vs. &lt;a href="#ListGetAt(weekResults1.values[i][1],3,"|")#"&gt;#ListGetAt(weekResults1.values[i][1],1,"|")# | #ListGetAt(weekResults1.values[i][1],2,"|")#&lt;/a&gt; &lt;img src="<cfif ListGetAt(weekResults1.values[i][1],1,"|") EQ "Forfeit">#structIMG["Random"]#<cfelse>#structIMG[ListGetAt(weekResults1.values[i][1],5,"|")]#</cfif>" /&gt; &lt;i&gt;[#aryMapSlot[i][2]#]&lt;/i&gt;&lt;br /&gt <br />';
 											</cfloop>
 											
 											document.getElementById("TL#x#").innerHTML = TLpad;
@@ -927,7 +933,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 					<tr>
 						<td>Race:</td>
 						<td>
-							<select name="race"  required="true"">
+							<select name="race"  required="true">
 								<option value="Protoss">Protoss</option>
 								<option value="Terran">Terran</option>
 								<option value="Zerg">Zerg</option>
@@ -956,18 +962,96 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 				<input type="submit" id="addPlayer" name="addPlayer" value="SUBMIT" style="width:150" />
 			</cfform>
 		</cfcase>
+		
+		<cfcase value="maps">
+			<cfset maps = getAdminMapPool(session.token.access_token)>
+			
+				<cfset bg="##d6c31d"> <cfset text="black">
+									<cfelseif i EQ "2" OR i EQ "3">
+										<cfset bg="##9b9b96"> <cfset text="black">
+									<cfelseif i EQ "4" OR i EQ "5" OR i EQ "6">
+										<cfset bg="##5f8eaf"> <cfset text="white">
+									<cfelseif i EQ "7">
+										<cfset bg="##2ebedb"> <cfset text="black">
+									</cfif>
+									<tr style="background-color:#bg#;color:#text#;" height="25px">
+			
+			
+			<div align="center">
+				<h1>Change Map Pool for New Season</h1><br/>
+				<h4 style="color:red">Warning: if this is changed mid-season, it will alter the map pool for all match history and future matches!</h4><br/>
+				<cfform name="frmMapPool" method="POST" action="http://www.duttles.com/captain.cfm?access=#accessLevel#">
+				<table width="70%">
+					</tr>
+						<th>Initial League Slot</th>
+						<th>Map Pool (Dictates Week One)</th>
+					<tr>
+					<tr style="background-color:##9b9b96;color:black;" height="25px">
+						<td style="text:bold;">Platinum Set One</td>
+						<td><input style="width:200" name="m1" value=""></td>
+					</tr>
+					<tr style="background-color:##d6c31d;color:black;" height="25px">
+						<td style="text:bold;">Gold Set</td>
+						<td><input style="width:200" name="m2" value=""></td>
+					</tr>
+					<tr style="background-color:##5f8eaf;color:white;" height="25px">
+						<td style="text:bold;">Diamond Set One</td>
+						<td><input style="width:200" name="m3" value=""></td>
+					</tr>
+					<tr style="background-color:##9b9b96;color:black;" height="25px">
+						<td style="text:bold;">Platinum Set Two</td>
+						<td><input style="width:200" name="m4" value=""></td>
+					</tr>
+					<tr style="background-color##5f8eaf;color:white;" height="25px">
+						<td style="text:bold;">Diamond Set Two</td>
+						<td><input style="width:200" name="m5" value=""></td>
+					</tr>
+					<tr style="background-color:##2ebedb;color:black;" height="25px">
+						<td>Master Set One</td>
+						<td><input style="width:200" name="m6" value=""></td>
+					</tr>
+					<tr style="background-color:##5f8eaf;color:white;" height="25px">
+						<td style="text:bold;">Diamond 2/3 Set</td>
+						<td><input style="width:200" name="m7" value=""></td>
+					</tr>
+				</table>
+				<input name="mapGO" value="SUBMIT" id="mapGO" style="width:150" onclick="return confirmSubmission()">
+				</cfform>
+			</div>
+			
+			<script>
+				function confirmSubmission(){
+					confirm("Warning: this will change the map pool for the current season. Continue?");
+				}
+			
+			</script>
+		</cfcase>
+		
 		<!------------------------
 		--------------------------
 				SELECTION 
 		--------------------------
 		------------------------->
 		<cfdefaultcase>
+			<cfset displayAccessLevel = "">
+			<cfset session.token = result.token>
+			<cfset profile = application.google.getProfile(session.token.access_token)>
+			<cfset email = profile.email>
+			<cfset authList = getUserAccess(session.token.access_token)>
+			<cfloop from="2" to="#ArrayLen(authList.values)#" index="i">
+				<cfif authList.values[i][2] EQ email>
+					<cfset displayAccessLevel = authList.values[i][4]>
+					<cfset accessTeam = authList.values[i][3]>
+					<cfset userName = authList.values[i][1]>
+				</cfif>
+			</cfloop>
 			<cfform name="frmTemplate" method="POST" action="http://www.duttles.com/captain.cfm?access=#accessLevel#">
 			<div align="center">
+			Welcome #userName# (#email#). You are currently logged in as a #displayAccessLevel# <cfif displayAccessLevel NEQ "ADMIN">for team #displayAccessLevel#</cfif>.<br/>
 				<table>
 					<tr>
 						<td colspan="2" align="center">
-							<h1>Create Template For Lineup Submission</h1>
+							<h1>CTL Manager Control Panel</h1>
 						</td>
 					</tr>
 				<tr>
@@ -1013,19 +1097,25 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 							<br/>
 							<div align="center" style="width:70%">
 								<div align="left">
+									<h4>Weekly Submissions (CAPTAIN)</h4><br/>
 									<input type="radio" id="lineup" name="type" value="lineup" required="true">Submit / Edit Weekly Lineup - BETA<br/>
 									<input type="radio" id="scores" name="type" value="scores">Submit / Edit Weekly Match Scores - ALPHA<br/>
 									<cfif url.access EQ trim(hash('ADMIN'))>
 										------------------------------------------------<br/>
+										<h4>Weekly Code Generators (ADMIN)</h4><br/>
 										<input type="radio" id="display,fullLineup" name="type" value="display,fullLineup"><label for="display,fullLineup">VIEW ALL LINEUP CODE FOR WEEK</label><br/>
 										<input type="radio" id="display,lineup" 	name="type" value="display,lineup"><label for="display,lineup">View Lineup Code for Matchup - BETA</label><br/>
 										<input type="radio" id="display,scores" 	name="type" value="display,scores"><label for="display,scores">View Score Code for Matchup - IN DEV</label><br/>
-										<input type="radio" id="display,status" 	name="type" value="display,status"><label for="display,status">View Team Submission Status ) - ALPHA</label><br/>
+										<input type="radio" id="display,status" 	name="type" value="display,status"><label for="display,status">View Team Submission Status - ALPHA</label><br/>
 										------------------------------------------------<br/>
+										<h4>Weekly Maintanence (ADMIN)</h4><br/>
 										<input type="radio" id="lock" 				name="type" value="lock"><label for="lock">Lock Lineups</label><br/>
 										<input type="radio" id="unlock" 			name="type" value="unlock"><label for="unlock">Unlock Lineups</label><br/>
 										-------------------------------------------------<br/>
-										<input type="radio" id="newApp"			name="type" value="newApp"><label for="newApp">Add Player (accepted application)</label>
+										<h4>Season Maintanence and Misc (ADMIN)</h4><br/>
+										<input type="radio" id="newApp"				name="type" value="newApp"><label for="newApp">Add Player (accepted application)</label>
+										<input type="radio" id="maps"				name="type" value="maps"><label for="maps">Edit Map Pool</label><br/>
+										<input type="radio" id="sheets"				name="type"	value="sheets"><label for="sheets">Open Master Google Sheet</label>
 									</cfif>
 								</div>
 							</div>
@@ -1050,10 +1140,9 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 					<div id="enjin" style="border-style:solid; width:600px;">
 					
 					</div>
-				<!---http://i.imgur.com/lY0rg.png [http://www.choboteamleague.com/profile/18919052 EDEdDNEdDYFaN | FeiFongWong#1213] <br />--->
 				</div>
 				<script>
-					var pad = '#structIMG[form.race]# [#form.profile# | #form.name# | #form.bnet# ] &lt;br /&gt';
+					var pad = '#structIMG[form.race]# [#form.profile# #form.name# | #form.bnet# ] &lt;br /&gt';
 					document.getElementById("enjin").innerHTML = pad;
 				</script>
 			</cfif>
