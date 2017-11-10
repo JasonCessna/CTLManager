@@ -170,7 +170,7 @@
 				<cfif qryDistinctThird.name NEQ eliminatedCandidate AND qryDistinctThird.name NEQ eliminatedCandidate2>
 					<cfif listContains(thirdList,qryDistinctThird.name)>
 					<cfelse>
-						<tr <cfif qryDistinctThird.currentRow EQ "1"> style="background-color:##e5867b" </cfif>>
+						<tr <cfif qryDistinctThird.name EQ eliminatedCandidate3> style="background-color:##e5867b" </cfif>>
 							<td>#qryDistinctThird.name#</td>
 							<td align="center">#canFirst[qryDistinctThird.name]#</td>
 							<td align="center">#canSecond[qryDistinctThird.name]#</td>
