@@ -257,7 +257,7 @@
 		<cfset fourthList = "">
 			<cfloop query="qryDistinctFourth">
 				<cfif qryDistinctFourth.name NEQ eliminatedCandidate AND qryDistinctFourth.name NEQ eliminatedCandidate2>
-					<cfif ListContins(fourthList,qryDistinctFourth.name)>
+					<cfif listContains(fourthList,qryDistinctFourth.name)>
 					<cfelse>
 					<tr <cfif qryDistinctFourth.currentRow EQ "1"> style="background-color:##98dd4d" </cfif>>
 						<td>#qryDistinctFourth.name#</td>
