@@ -100,8 +100,11 @@
 				<th>Second Votes</th>
 				<th>Updated Total Votes</th>
 			</tr>
+			<cfset candidates2 = candidates>
+			<cfset candidates2 = StructSort(candidates,"numeric")>
+			<cfset eliminatedCandidate2 = candidates2[2]>
 			<cfloop query="qrySecondVote">
-				<tr <cfif qrySecondVote.currentRow EQ "1"> style="background-color:##e5867b" </cfif>>
+				<tr <cfif qrySecondVote.secondVote EQ eliminatedCandidate2> style="background-color:##e5867b" </cfif>>
 					<td>#qrySecondVote.secondVote#</td>
 					<td align="center">#canFirst[qrySecondVote.secondVote]#</td>
 					<td align="center">#qrySecondVote.totalSecondVotes#</td>
@@ -112,7 +115,6 @@
 		<cfset candidatesHolder = candidates>
 		<cfset candidates = StructSort(candidates,"numeric")>
 
-		<cfset eliminatedCandidate2 = candidates[2]>
 		Eliminated candidate: #eliminatedCandidate2#<br/>
 	</div>
 
