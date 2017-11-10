@@ -165,17 +165,21 @@
 				<th>Third Votes</th>
 				<th>Updated Total Votes</th>
 			</tr>
-			
+			<Cfset thirdList = "">
 			<cfloop query="qryDistinctThird">
 				<cfif qryDistinctThird.name NEQ eliminatedCandidate AND qryDistinctThird.name NEQ eliminatedCandidate2>
-					<tr <cfif qryDistinctThird.currentRow EQ "1"> style="background-color:##e5867b" </cfif>>
-						<td>#qryDistinctThird.name#</td>
-						<td align="center">#canFirst[qryDistinctThird.name]#</td>
-						<td align="center">#canSecond[qryDistinctThird.name]#</td>
-						<td align="center">#canSecondNew[qryDistinctThird.name]#</td>
-						<td align="center">#canThird[qryDistinctThird.name]#</td>
-						<td align="center">#candidatesHolder[qryDistinctThird.name]#</td>
-					</tr>
+					<cfif listContains(thirdList,qryDistinctThird.name)>
+					<cfelse>
+						<tr <cfif qryDistinctThird.currentRow EQ "1"> style="background-color:##e5867b" </cfif>>
+							<td>#qryDistinctThird.name#</td>
+							<td align="center">#canFirst[qryDistinctThird.name]#</td>
+							<td align="center">#canSecond[qryDistinctThird.name]#</td>
+							<td align="center">#canSecondNew[qryDistinctThird.name]#</td>
+							<td align="center">#canThird[qryDistinctThird.name]#</td>
+							<td align="center">#candidatesHolder[qryDistinctThird.name]#</td>
+						</tr>
+						<cfset thirdList = listAppend(thirdList,qryDistinctThird.name)>
+					</cfif>
 				</cfif>
 			</cfloop>
 		</table><br/>
@@ -250,9 +254,11 @@
 				<th>Fourth Votes</th>
 				<th>Updated Total Votes</th>
 			</tr>
-			
+		<cfset fourthList = "">
 			<cfloop query="qryDistinctFourth">
 				<cfif qryDistinctFourth.name NEQ eliminatedCandidate AND qryDistinctFourth.name NEQ eliminatedCandidate2>
+					<cfif ListContins(fourthList,qryDistinctFourth.name)>
+					<cfelse>
 					<tr <cfif qryDistinctFourth.currentRow EQ "1"> style="background-color:##98dd4d" </cfif>>
 						<td>#qryDistinctFourth.name#</td>
 						<td align="center">#canFirst[qryDistinctFourth.name]#</td>
@@ -263,6 +269,8 @@
 						<td align="center">#canFourth[qryDistinctFourth.name]#</td>
 						<td align="center">#candidatesHolder[qryDistinctFourth.name]#</td>
 					</tr>
+					<cfset fourthList = listAppend(fourthList,qryDistinctFourth.name)>
+					</cfif>
 				</cfif>
 			</cfloop>
 		</table><br/>
