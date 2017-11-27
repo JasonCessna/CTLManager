@@ -27,7 +27,7 @@ BEGIN HEADER
 
 <cfif isDefined('form.mapsGO')>
 	<cfset push = pushMapsSubmitted(session.token.access_token,form.m1,form.m2,form.m3,form.m4,form.m5,form.m6,form.m7)>
-	<cfdump var=#push#"><br/>
+	<cfdump var="#push#"><br/>
 	<div align="center" style="color:blue">
 		<h5>Map Pool Successfuly Updated</h5>
 	</div>
