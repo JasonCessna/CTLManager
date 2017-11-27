@@ -19,7 +19,7 @@
 		<cfparam name="url.error" default="">
 	
 		<cfset result = application.google.validateResult(url.code, url.error, url.state, session.urltoken)>
-
+		<cfset session.result = result>
 		
 		<cfif not result.status>
 		  <!--- Imagine a nicer error here. --->

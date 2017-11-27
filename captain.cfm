@@ -1034,7 +1034,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 		------------------------->
 		<cfdefaultcase>
 			<cfset displayAccessLevel = "">
-			<cfset session.token = result.token>
+			<cfset session.token = session.result.token>
 			<cfset profile = application.google.getProfile(session.token.access_token)>
 			<cfset email = profile.email>
 			<cfset authList = getUserAccess(session.token.access_token)>
