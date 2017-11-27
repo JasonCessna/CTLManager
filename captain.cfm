@@ -962,7 +962,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 				<input type="submit" id="addPlayer" name="addPlayer" value="SUBMIT" style="width:150" />
 			</cfform>
 		</cfcase>
-		
+		<!---
 		<cfcase value="maps">
 			<cfset maps = getAdminMapPool(session.token.access_token)>
 			
@@ -1026,7 +1026,7 @@ You do not have the proper permissions to view this site. Please contact a CTL A
 			
 			</script>
 		</cfcase>
-		
+		--->
 		<!------------------------
 		--------------------------
 				SELECTION 
